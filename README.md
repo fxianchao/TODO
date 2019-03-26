@@ -28,9 +28,14 @@
       - [安装pip3](#安装pip3)
       - [安装venv](#安装venv)
       - [新建虚拟环境`flask_p3`](#新建虚拟环境flask_p3)
-      - [修改`.bashrc`](#修改bashrc)
+      - [修改`.bashrc`简化命令](#修改bashrc简化命令)
       - [安装配置nginx](#安装配置nginx)
       - [查看linux内核版本](#查看linux内核版本)
+    - [19-3-26](#19-3-26)
+      - [配置微信公众号服务器](#配置微信公众号服务器)
+        - [nginx虚拟主机配置](#nginx虚拟主机配置)
+        - [flask后台](#flask后台)
+        - [微信公众号配置(测试号)](#微信公众号配置测试号)
 - [3-程序员面试宝典](#3-程序员面试宝典)
 - [4-python官方教程](#4-python官方教程)
   - [19-3-24](#19-3-24)
@@ -266,7 +271,7 @@
 5. 安装包`pip install xmltodict`.
 6. 退出环境`deactivate`.
 
-##### 修改`.bashrc`
+##### 修改`.bashrc`简化命令
 
 ```shell
 # 激活虚拟环境flask_p3
@@ -437,6 +442,142 @@ alias upgrade="sudo apt-get upgrade"
 ##### 查看linux内核版本
 
 * `uname -a`.
+
+#### 19-3-26
+
+##### 配置微信公众号服务器
+
+###### nginx虚拟主机配置
+
+* nginx端口配置`/home/ubuntu/nginx_config/nginx_demo_1`.
+
+  ```bash
+  server {
+      listen 80;
+      server_name 188.131.238.69;
+      access_log  /home/ubuntu/nginx_config/logs/nginx_config.log;
+
+      location / {
+      index index.html;
+      root  /home/ubuntu/project/nginx_demo;
+      }
+
+      location /wechat8000 {
+          proxy_pass        http://localhost:8000;
+          proxy_set_header  X-Real-IP  $remote_addr;
+      }
+  }
+  ```
+
+###### flask后台
+
+* flask后台配置
+
+  ```py
+  # coding:utf-8
+
+  from flask import Flask, request, abort#, render_template
+  import hashlib
+  import xmltodict
+  import time
+  #import urllib2
+  #import json
+
+  # 常量
+  # 微信的token令牌
+  WECHAT_TOKEN = "fxianchao521"
+  WECHAT_APPID = "wxdced5994bd2d4619"
+  WECHAT_APPSECRET = "20cc1947b43272294e8528f26b72861b"
+
+  app = Flask(__name__)
+
+
+  @app.route("/wechat8000", methods=["GET", "POST"])
+  def wechat():
+      """对接微信公众号服务器"""
+      # 接收微信服务器发送的参数
+      signature = request.args.get("signature")
+      timestamp = request.args.get("timestamp")
+      nonce = request.args.get("nonce")
+      echostr = request.args.get("echostr")
+
+      # 校验参数
+      if not all([signature, timestamp, nonce]):
+          abort(400)
+
+      # 按照微信的流程进行计算签名
+      li = [WECHAT_TOKEN, timestamp, nonce]
+      # 排序
+      li.sort()
+      # 拼接字符串
+      tmp_str = "".join(li)
+      # 进行sha1加密, 得到正确的签名值
+      sign = hashlib.sha1(tmp_str.encode("utf-8")).hexdigest()
+
+      # 将自己计算的签名值与请求的签名参数进行对比，如果相同，则证明请求来自微信服务器
+      if signature != sign:
+          # 表示请求不是微信发的
+          abort(403)
+      else:
+          # 表示是微信发送的请求
+          if request.method == "GET":
+              # 表示是第一次接入微信服务器的验证
+              echostr = request.args.get("echostr")
+              if not echostr:
+                  abort(400)
+              return echostr
+          elif request.method == "POST":
+              # 表示微信服务器转发消息过来
+              xml_str = request.data
+              if not xml_str:
+                  abort(400)
+
+              # 对xml字符串进行解析
+              xml_dict = xmltodict.parse(xml_str)
+              xml_dict = xml_dict.get("xml")
+
+              # 提取消息类型
+              msg_type = xml_dict.get("MsgType")
+
+              if msg_type == "text":
+                  # 表示发送的是文本消息
+                  # 构造返回值，经由微信服务器回复给用户的消息内容
+                  resp_dict = {
+                      "xml": {
+                          "ToUserName": xml_dict.get("FromUserName"),
+                          "FromUserName": xml_dict.get("ToUserName"),
+                          "CreateTime": int(time.time()),
+                          "MsgType": "text",
+                          "Content": xml_dict.get("Content")
+                      }
+                  }
+              else:
+                  resp_dict = {
+                      "xml": {
+                          "ToUserName": xml_dict.get("FromUserName"),
+                          "FromUserName": xml_dict.get("ToUserName"),
+                          "CreateTime": int(time.time()),
+                          "MsgType": "text",
+                          "Content": "i love u"
+                      }
+                  }
+
+              # 将字典转换为xml字符串
+              resp_xml_str = xmltodict.unparse(resp_dict)
+              # 返回消息数据给微信服务器
+              return resp_xml_str
+
+
+  if __name__ == "__main__":
+      app.run(host="0.0.0.0", port=8000, debug=False)
+
+  ```
+
+###### 微信公众号配置(测试号)
+
+1. 配置URL`http://111.111.111.111/wechat8000`.
+2. 配置token`wechat`
+3. 验证
 
 ---
 
