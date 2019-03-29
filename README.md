@@ -68,6 +68,10 @@
         - [5.6 a,b交换与比较](#56-ab交换与比较)
         - [5.7 c和c++的关系](#57-c和c的关系)
         - [5.8 程序设计的其他问题](#58-程序设计的其他问题)
+  - [19-3-29](#19-3-29)
+      - [第6章 预处理,const与sizeof](#第6章-预处理const与sizeof)
+        - [6.1 宏定义](#61-宏定义)
+        - [6.2 const](#62-const)
 - [4-python官方文档](#4-python官方文档)
   - [>>>1入门教程](#1入门教程)
     - [19-3-24](#19-3-24)
@@ -173,6 +177,11 @@
       - [微信公众号服务器配置](#微信公众号服务器配置)
       - [收发消息,事件](#收发消息事件)
       - [微信网页授权](#微信网页授权)
+  - [>>>17-flask项目-爱家租房](#17-flask项目-爱家租房)
+    - [19-3-29](#19-3-29-1)
+      - [前后端分离](#前后端分离)
+      - [项目文件目录结构](#项目文件目录结构)
+      - [日志功能](#日志功能)
 - [6-牛客网](#6-牛客网)
     - [19-3-22](#19-3-22-1)
       - [C/C++*50](#cc50)
@@ -212,7 +221,7 @@
         - [赋值语句表达式列表,循环赋值](#赋值语句表达式列表循环赋值)
     - [19-3-28](#19-3-28-3)
       - [section-外表是靠不住的](#section-外表是靠不住的)
-        - [外表和英文字母一样,但是实际上不一样](#外表和英文字母一样但是实际上不一样)
+        - [即使外表和英文字母一样,但并不一样](#即使外表和英文字母一样但并不一样)
         - [内存空间被释放后重新分配相同地址](#内存空间被释放后重新分配相同地址)
         - [不要混用制表符和空格](#不要混用制表符和空格)
 - [8-电影](#8-电影)
@@ -979,7 +988,7 @@ alias upgrade="sudo apt-get upgrade"
     * 解析:
       1. 考察两个知识点,类型转换和运算符优先级.
          1. 类型转换,对于`unsigned char b = ~a >> 4 + 1;`,编译器首先会把a和4提升为整形后在计算,完成后转换为`unsigned char`赋值给b.
-         2. 优先级,`~`高于`+`高于`>>`
+         2. 优先级`~`高于`+`高于`>>`
             1. 先对`1010 0101`取反得`0101 1010`,再右移(4+1)位,结果为`0000 0010`.
          3. `~a`操作时,首先对a进行整形提升,a为无符号数,提升时左边补0,即`~0x0000 00a5`为`0xffff ff5a`,右移5位后`0x07ff ffffa`,截取后为`0xfa`,即`250`.
     ![运算符优先级](./images/运算符优先级.png)
@@ -1130,6 +1139,121 @@ alias upgrade="sudo apt-get upgrade"
         return ret;
     }
     ```
+
+### 19-3-29
+
+##### 第6章 预处理,const与sizeof
+
+###### 6.1 宏定义
+
+1. 下面代码输出结果?
+
+    ```c
+    #include <stdio.h>
+    #define SUB(x, y) x - y
+    #define ACCESS_BEFORE(element, offset, value) *SUB(&element, offset) = value
+
+    int main(int argc, char const *argv[])
+    {
+        int array[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+        ACCESS_BEFORE(array[5], 4, 6);  // 此处报错
+        for (size_t i = 0; i < 10; i++)
+        {
+            printf("%d", array[i]);
+        }
+
+        return 0;
+    }
+    ```
+
+    A. array:1 6 3 4 5 6 7 8 9 10  
+    B. array:6 2 3 4 5 6 7 8 9 10  
+    C. 程序可以正常编译,但是运行时崩溃  
+    **D. 程序语法错误,编译不成功**  
+
+    * 解析:宏的预处理被替换成了`*&array[5]-4=6`,优先处理减号,返回一个右值,所以编译报错.
+
+2. 用预处理指令#define声明一个常数,用以表明一年中有多少秒(忽略闰年)
+
+    * 解析:`#define SECONDS_PER_YEAR (60 * 60 *24 * 365)UL`
+
+3. 写一个标准宏MIN,输入两个参数返回较小的一个.
+
+    * 解析:`#define MIN(A, B) ((A)<=(B)?(A):(B))`
+
+###### 6.2 const
+
+1. 哪个const应该被移除?
+
+    ```cpp
+    #include <iostream>
+    #include <windows.h>
+    #define BUF_SIZE 30
+
+    using namespace std;
+
+    class A
+    {
+      private:
+        const /* C */ BYTE *const /* D处应被移除 */ m_pBuf;
+
+      public:
+        A();
+        ~A(){};
+        inline const /* A */ BYTE *GetBuffer() const /* B */ { return m_pBuf; }
+        int Pop(void);
+    };
+
+    A::A() : m_pBuf()
+    {
+        BYTE *pBuf = new BYTE[BUF_SIZE];
+        if (pBuf == NULL)
+        {
+            return;
+        }
+        for (size_t i = 0; i < BUF_SIZE; i++)
+        {
+            pBuf[i] = i;
+        }
+        m_pBuf = pBuf; // 此处报错
+    }
+
+    int main(int argc, char const *argv[])
+    {
+        A a;
+        const/* E */ BYTE *pB = a.GetBuffer();
+        if (pB != NULL)
+        {
+            for (size_t i = 0; i < BUF_SIZE; i++)
+            {
+                printf("%u", pB[i++]);
+            }
+        }
+        system("pause");
+
+        return 0;
+    }
+    ```
+
+    * 解析:
+      1. const位于*号左侧,底层const,用于修饰整值指向的变量,可以不初始化指针.不可以通过指针修改变量.但是可以将指针指向别处或从别处修改变量.
+      2. const位于*号右侧,顶层const,用于修饰指针本身,必须初始化指针,且不可以更改指针的指向.但是可以通过指针改变变量.
+      3. 两个const,指针本身和所指变量均不可以改变.
+      4. const成员函数为只读函数,不可以修改数据成员或者调用非const成员函数.
+
+2. const和#define有什么区别?
+   
+   *解析:C++中可以使用const或者#define定义常量,但前者比后者有更多的优点:
+      1. const常量有数据类型,而宏常量没有数据类型.对前者可以进行类型安全检查,后则只进行简单的字符串替换,并且可能出错.
+      2. 部分集成化调试工具可以对const变量进行调试,c++中const可以完全替代宏.
+   * 扩展知识:
+      1. c++中的const,不会分配内存,而是直接写入符号表中,成为一个编译期间的常量(常量折叠),即使强制分配地址并修改也没有效果,因为直接从符号表中取值.
+      2. c中的const会分配内存,通过地址可以直接更改."一个不可以被改变的普通变量",c编译器不会把const看作一个编译期间的常量.
+      3. c默认const是外部链接的,而c++默认const是内部链接的.
+
+3. const成员函数如何修改成员变量?
+
+    * 解析:在C++中,给类的数据成员加上`mutable`后,即使是const成员函数也可以修改它.
 
 ---
 
@@ -1704,6 +1828,37 @@ alias upgrade="sudo apt-get upgrade"
 6. 第三方服务器得到验证之后获取用户信息.
 7. 第三方服务器返回网页.
 
+### >>>17-flask项目-爱家租房
+
+#### 19-3-29
+
+##### 前后端分离
+
+1. 前后端不分离,后端提供被数据渲染之后的模板,即完整网页.
+2. 前后端分离,后端不再控制前端的效果展示,仅仅提供数据,可以实现接口复用,但不利于SEO.
+
+##### 项目文件目录结构
+
+1. 在单一文件(manage.py)中构建所有依赖工具.
+   1. 配置信息.
+   2. 数据库.
+   3. redis.
+   4. 使用flask-session扩展将session保存到redis中.
+   5. 使用flask-wtf中的csrfprotrction防护.
+2. 依次拆分
+   1. 将配置信息拆分(config.py),可以通过继承得到不同的配置,并使用工厂模式根据不同的参数创建不同的app对象.
+   2. 创建包`ihome`,在包的`__init__.py`中提供`creat_app`接口,并完成其他相关操作.
+      1. 在`ihome`下创建带版本号的包`api_1_0`,在`__init__.py`中创建蓝图,在其中存放视图.
+      2. 在`ihome`下创建`static`静态文件.
+      3. 在`ihome`下创建`utils`工具.
+      4. 在`ihome`下创建`libs`包,存放第三方扩展包.
+      5. 在`ihome`下创建`models.py`.
+   3. 最终,在`manage.py`中仅仅创建app并提供脚本.
+
+##### 日志功能
+
+* 使用python自带的logging模块以及current_app中的logger全局对象.
+
 ---
 
 ## 6-牛客网
@@ -1794,7 +1949,7 @@ alias upgrade="sudo apt-get upgrade"
 
 ##### section-外表是靠不住的
 
-###### 外表和英文字母一样,但是实际上不一样
+###### 即使外表和英文字母一样,但并不一样
 
 ###### 内存空间被释放后重新分配相同地址
 
@@ -1812,4 +1967,4 @@ alias upgrade="sudo apt-get upgrade"
 
 ---
 
-<a href="#" alt="开始" id="1" style="position:fixed;right:10%;bottom:40%;color:rgba(255,0,0,0.5);font-size:32px;text-decoration:none;">首页</a>
+<a href="#" alt="开始" id="1" style="position:fixed;right:10%;bottom:40%;color:rgba(255,0,0,0.3);font-size:32px;text-decoration:none;">首页</a>
