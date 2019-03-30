@@ -30,7 +30,6 @@
       - [新建虚拟环境`flask_p3`](#新建虚拟环境flask_p3)
       - [修改`.bashrc`简化命令](#修改bashrc简化命令)
       - [安装配置nginx](#安装配置nginx)
-      - [查看linux内核版本](#查看linux内核版本)
     - [19-3-26](#19-3-26)
       - [配置微信公众号服务器](#配置微信公众号服务器)
         - [nginx虚拟主机配置](#nginx虚拟主机配置)
@@ -39,6 +38,13 @@
     - [19-3-27](#19-3-27)
       - [切换用户](#切换用户)
       - [查看当前登录用户](#查看当前登录用户)
+    - [19-3-30](#19-3-30)
+      - [软件更新](#软件更新)
+      - [内核](#内核)
+      - [配置vim](#配置vim)
+      - [终端配色](#终端配色)
+      - [mysql客户端](#mysql客户端)
+      - [踢除用户](#踢除用户)
 - [3-程序员面试宝典[5]](#3-程序员面试宝典5)
   - [19-3-28](#19-3-28)
     - [第一部分 求职过程](#第一部分-求职过程)
@@ -182,6 +188,10 @@
       - [前后端分离](#前后端分离)
       - [项目文件目录结构](#项目文件目录结构)
       - [日志功能](#日志功能)
+    - [19-3-30](#19-3-30-1)
+      - [数据表设计](#数据表设计)
+      - [日志系统bug](#日志系统bug)
+      - [数据库迁移](#数据库迁移-1)
 - [6-牛客网](#6-牛客网)
     - [19-3-22](#19-3-22-1)
       - [C/C++*50](#cc50)
@@ -329,15 +339,15 @@
 
 ##### 软件升级
 
-* `sudo apt-get upgrade`.
+* `sudo apt upgrade`.
 
 ##### 安装pip3
 
-* `sudo apt-get install python3-pip`.
+* `sudo apt install python3-pip`.
 
 ##### 安装venv
 
-* `sudo apt-get install python3-venv`.
+* `sudo apt install python3-venv`.
 
 ##### 新建虚拟环境`flask_p3`
 
@@ -350,18 +360,20 @@
 
 ##### 修改`.bashrc`简化命令
 
-```shell
+```bash
 # 激活虚拟环境flask_p3
 alias act_flask="source /home/ubuntu/env/flask_p3/bin/activate"
 # 清理窗口
 alias cl="clear"
 # 软件升级
-alias upgrade="sudo apt-get upgrade"
+alias upgrade="sudo apt upgrade"
+# 更新软件源
+alias update="sudo apt update"
 ```
 
 ##### 安装配置nginx
 
-1. `sudo apt-get install nginx`.
+1. `sudo apt install nginx`.
 2. 启动服务`sudo systemctl start nginx`.
 3. 停止服务`sudo systemctl stop nginx`.
 4. 设为开机启动`sudo systemctl enable nginx`.
@@ -513,12 +525,8 @@ alias upgrade="sudo apt-get upgrade"
         }
         ```
 
-    2. 建立软连接`sudo ln -s /home/ubuntu/nginx_config/nginx_demo_1  /etc/nginx/sites-enabled/`,nginx配置文件会自动读取内容.
+    2. 建立软连接`sudo ln -s /home/ubuntu/nginx_config/nginx_demo_1  /etc/nginx/sites-enabled/`,应使用完整路径.nginx配置文件会自动读取内容.
     3. 重启nginxf服务`sudo systemctl reload nginx.service`.
-
-##### 查看linux内核版本
-
-* `uname -a`.
 
 #### 19-3-26
 
@@ -526,7 +534,7 @@ alias upgrade="sudo apt-get upgrade"
 
 ###### nginx虚拟主机配置
 
-* nginx端口配置`/home/ubuntu/nginx_config/nginx_demo_1`.
+* nginx虚拟主机配置`/home/ubuntu/nginx_config/nginx_demo_1`.
 
   ```bash
   server {
@@ -660,7 +668,7 @@ alias upgrade="sudo apt-get upgrade"
 
 ##### 切换用户
 
-1. 切换到root`sudo su`.
+1. 切换到root`sudo su`或`su root`,使用一个`-`可以切换到对应的用户目录.
 2. 切换到其他用户`su username`.
 3. 更改root密码`sudo passwd root`.
 
@@ -675,6 +683,61 @@ alias upgrade="sudo apt-get upgrade"
 4. `whoami`显示自己,与`id -un`效果一样.
 5. `who am i`显示更多的信息.
 6. `last`显示特定用户登录系统的历史记录.如果没有指定任何参数,则显示所有用户的历史信息.
+
+#### 19-3-30
+
+##### 软件更新
+
+1. `sudo apt upgrade`.
+2. 列出已经安装的包`sudo apt list --installed`.
+3. 下载的deb包在`/var/cache/apt/archives`.
+
+##### 内核
+
+1. 查看当前内核版本`uname -a`.
+2. 查看全部内核`sudo dpkg --get-selections | grep linux-image`.
+3. 升级安装内核`sudo apt-get install linux-image-4.15.0-46-generic`.
+4. 删除内核`sudo apt-get remove linux-image-4.15.0-29-generic`.
+5. 删除`deinstall`的内核`sudo dpkg -P linux-image-4.15.0-29-generic`.
+
+##### 配置vim
+
+1. 配置vim`/etc/vim/vimrc`
+
+    ```bash
+    " The following are commented out as they cause vim to behave a lot
+    " differently from regular Vi. They are highly recommended though.
+    set showcmd     " Show (partial) command in status line.
+    set showmatch       " Show matching brackets.
+    set ignorecase      " Do case insensitive matching
+    set smartcase       " Do smart case matching
+    "set incsearch      " Incremental search
+    "set autowrite      " Automatically save before commands like :next and :make
+    "set hidden     " Hide buffers when they are abandoned
+    set mouse=a     " Enable mouse usage (all modes)
+    set number
+    set wrap
+    set ruler
+    set tabstop=4
+    ```
+
+##### 终端配色
+
+1. 在`.bashrc`中打开`force_color_prompt=yes`,打开彩色终端.
+2. 配置`PS1='${debian_chroot:+($debian_chroot)}\[\033[03;34;01m\]\u\[\033[00;32;01m\]@\[\033[01;31;01m\]\h\[\033[00;37;01m\]:\[\033[01;35;01m\]\w \[\033[01;33;01m\]\$ \[\033[00;36;01m\]'`.
+
+##### mysql客户端
+
+1. 安装mysql客户端`sudo apt install mysql-client`.
+2. 使用`mysql -h db4free.net -P 3306 -umy__sql -p`访问免费数据库.
+3. 在`~/.bashrc`中添加简化命令`alias db4free="mysql -h db4free.net -P 3306 -umy__sql -p`.
+
+##### 踢除用户
+
+1. `pkill -kill -t pts/1`.
+2. `skill -kill -t pts/1`.
+3. `skill -stop -u user1`.
+4. `skill -kill -u user1`杀死并注销user1.
 
 ---
 
@@ -1830,6 +1893,16 @@ alias upgrade="sudo apt-get upgrade"
 
 ### >>>17-flask项目-爱家租房
 
+1. CloudStudio中`apt update`后安装`mysql-client`和`libmysqlclient-dev`和`redis-server`.
+2. pip安装`requirements.txt`和`redis`.
+3. 免费数据库`mysql -h db4free.net -P 3306 -umy__sql -p`.
+4. 启动redis`/etc/init.d/redis-server start`.
+5. 关闭redis.
+   1. `CTRL+C`.
+   2. `kill pid`.
+   3. `redis-cli shutdown`.
+   4. `/etc/init.d/redis-server stop`.
+
 #### 19-3-29
 
 ##### 前后端分离
@@ -1858,6 +1931,25 @@ alias upgrade="sudo apt-get upgrade"
 ##### 日志功能
 
 * 使用python自带的logging模块以及current_app中的logger全局对象.
+
+#### 19-3-30
+
+##### 数据表设计
+
+1. 以存储空间换查询时间.
+2. 多对多通过中间表实现.
+
+##### 日志系统bug
+
+* debug模式下设置日志级别不起作用.
+
+##### 数据库迁移
+
+1. 1
+2. `python manage.py db init`.
+3. `python manage.py db migrate -m '说明'`别忘了import models证明一下models的存在.
+   1. 迁移时报错SQLAlchemy报错(1193),升级SQLAlchemy或者降级mysql可以解决.
+4. `python manage.py db upgrade`.
 
 ---
 
