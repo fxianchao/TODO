@@ -78,6 +78,9 @@
       - [第6章 预处理,const与sizeof](#第6章-预处理const与sizeof)
         - [6.1 宏定义](#61-宏定义)
         - [6.2 const](#62-const)
+  - [19-4-2](#19-4-2)
+        - [6.3 sizeof](#63-sizeof)
+        - [6.4 内联函数和宏定义](#64-内联函数和宏定义)
 - [4-python官方文档](#4-python官方文档)
   - [~~>>>1入门教程{19-4-1}~~](#1入门教程19-4-1)
     - [19-3-24](#19-3-24)
@@ -1097,7 +1100,7 @@ alias update="sudo apt update"
          2. 优先级`~`高于`+`高于`>>`
             1. 先对`1010 0101`取反得`0101 1010`,再右移(4+1)位,结果为`0000 0010`.
          3. `~a`操作时,首先对a进行整形提升,a为无符号数,提升时左边补0,即`~0x0000 00a5`为`0xffff ff5a`,右移5位后`0x07ff ffffa`,截取后为`0xfa`,即`250`.
-    ![运算符优先级](./images/运算符优先级.png)
+    ![运算符优先级](./images/Operator_precedence.png)
 
 2. 用一个表达式,判断一个数X是否是2的N次方,不使用用循环语句.(**!(X&(X-1))**)
 
@@ -1360,6 +1363,391 @@ alias update="sudo apt update"
 3. const成员函数如何修改成员变量?
 
     * 解析:在C++中,给类的数据成员加上`mutable`后,即使是const成员函数也可以修改它.
+
+### 19-4-2
+
+###### 6.3 sizeof
+
+1. 下面代码的输出是什么?
+
+    ```cpp
+    #include <iostream>
+    #include <stdio.h>
+    #include <string.h>
+
+    using namespace std;
+
+    struct
+    {
+        short a1;
+        short a2;
+        short a3;
+    } A;
+
+    struct
+    {
+        long a1;
+        short a2;
+    } B;
+
+    int main(int argc, char const *argv[])
+    {
+        char *ss1 = "0123456789";
+        char ss2[] = "0123456789";
+        char ss3[100] = "0123456789";
+        int ss4[100];
+        char q1[] = "abc";
+        char q2[] = "a\n";
+        char *q3 = "a\n";
+        char *str1 = (char *)malloc(100);
+        void *str2 = (void *)malloc(100);
+
+        cout << sizeof(ss1) << " ";
+        cout << sizeof(ss2) << " ";
+        cout << sizeof(ss3) << " ";
+        cout << sizeof(ss4) << " ";
+        cout << sizeof(q1) << " ";
+        cout << sizeof(q2) << " ";
+        cout << sizeof(q3) << " ";
+        cout << sizeof(A) << " ";
+        cout << sizeof(B) << " ";
+        cout << sizeof(str1) << " ";
+        cout << sizeof(str2) << " ";
+
+        return 0;
+    }
+    ```
+
+    * 解析:
+      1. 指针的大小是定值,为4.
+      2. 字符数组要加上最后的`\0`;
+      3. 结构体考虑内存对齐:
+         1. 当结构体内的元素长度都小于处理器的位数时,以结构体中最长数据元素为对齐单元,即结构体长度一定是最长数据元素长度的整数倍.
+         2. 当结构体内的某个元素长度大于处理器的位数时,以处理器位数为对齐单元,即结构体长度一定是处理器位数的整数倍.
+      4. CPU的优化规则:对于n字节的元素,它的首地址能被n整除,才能获得最好的性能.
+      5. 数据对齐:数据所在的内存地址必须是该数据长度的整数倍,但是不同编译器优化结果不同.
+      6. 答案:`4 11 100 400 4 3 4 6 8 4 4`.
+
+2. 以下代码在32位机器编译,数据以4字节为对齐单位,输出结果为什么不同?
+
+    ```cpp
+    class B
+    {
+      private:
+        bool m_bTemp;
+        int m_nTemp;
+        bool m_bTemp2;
+    }
+    class C
+    {
+      private:
+        int m_nTemp;
+        bool m_bTemp;
+        bool m_bTemp2;
+    }
+
+    cout << sizeof(B) << endl;
+    cout << sizeof(C) << endl;
+
+    ```
+
+    * 解析:
+      1. 在访问内存时,地址按对齐单位访问,效率会高很多,原因在于访问内存的硬件电路,一般情况下,地址总线总是按照对齐后的地址来访问.
+      2. 在VC中,可以通过`pack`预处理指令来禁止对齐策略.除非必要,否则不要用:
+         1. 需要将结构写入文件;
+         2. 需要将结构通过网络传输给其他程序.
+      3. 字节对齐是在编译时决定的.
+      4. 答案:`12 8`.
+
+3. 下面程序的输出结果?
+
+    ```cpp
+    #include <iostream>
+
+    using namespace std;
+
+    class A1
+    {
+      public:
+        int a;
+        static int b;
+
+        A1();
+        ~A1();
+    };
+    class A2
+    {
+      public:
+        int a;
+        char c;
+
+        A2();
+        ~A2();
+    };
+    class A3
+    {
+      public:
+        float a;
+        char c;
+
+        A3();
+        ~A3();
+    };
+    class A4
+    {
+      public:
+        float a;
+        int b;
+        char c;
+
+        A4();
+        ~A4();
+    };
+    class A5
+    {
+      public:
+        double d;
+        float a;
+        int b;
+        char c;
+
+        A5();
+        ~A5();
+    };
+
+    int main(int argc, char const *argv[])
+    {
+        cout << sizeof(A1) << endl;
+        cout << sizeof(A2) << endl;
+        cout << sizeof(A3) << endl;
+        cout << sizeof(A4) << endl;
+        cout << sizeof(A5) << endl;
+
+        return 0;
+    }
+    ```
+
+    * 解析:
+      1. sizeof()计算栈中分配的大小;
+      2. 答案:`4 8 8 12 24`.
+
+4. 说明sizeof和strlen的区别?
+   1. sizeof操作符的结果类型是size_t,它在头文件中的typedef为unsigned int类型,该类型保证能容纳实现所建立的最大对象的字节大小;
+   2. sizeof是运算符,strlen是函数;
+   3. sizeof可以使用类型做参数,strlen只能使用char*做参数,且必须以`\0`结尾.sizeof可以使用函数做参数,使用的是函数的返回值;
+   4. 数组做sizeof的参数不退化,传递给strlen就退化成指针;
+   5. 大部分编译器在**编译**的时候就把sizeof计算过了.因此sizeof()可以用来定义数组的维数;
+   6. strlen的结果在运行时计算;
+   7. sizeof后如果是类型必须加括号,如果是变量名可以不加括号,这是因为sizeof是个操作符而不是函数;
+   8. sizeof不能返回被动态分配的数组或外部的数组的尺寸;
+   9. 数组作为参数传递给函数时传递的是数组的首地址,函数内无法获得数组的大小;
+   10. 计算结构变量的大小就必须讨论数据对齐问题,可以使用`#pragma pack(n)`调整,或关闭`Data Alifnment`选项;
+   11. sizeof不能用于函数类型,不完全类型或位字段.
+5. 说明sizeof的使用场合?
+   1. 与存储分配和I/O系统那样的例程进行通信;
+   2. 查看在内存中所占的空间;
+   3. 动态分配对象时,指定内存大小;
+   4. 便于类型的扩充;
+   5. 使用sizeof代替常量计算;
+   6. 函数中的形参为数组或函数时,给出指针的大小.
+6. `int **a[3][4]`占据多大空间?
+   1. 3×4×4(指针)=48.
+7. 找出下列程序的错误并解释?
+
+    ```cpp
+    #include <iostream>
+    #include <string>
+
+    using namespace std;
+
+    int main(int argc, char const *argv[])
+    {
+        // To output "TrendNicroSoftUSCN"
+
+        string strArr1[] = {"Trend", "Micro", "Soft"};
+        string *pStrArr1 = new string[2];
+        pStrArr1[0] = "US";
+        pStrArr1[1] = "CN";
+        for (size_t i = 0; i < sizeof(strArr1) / sizeof(string); i++)
+        {
+            cout << strArr1[i];
+        }
+        for (size_t j = 0; j < sizeof(pStrArr1) / sizeof(string); j++)  // 有错误
+        {
+            cout << pStrArr1[j];
+        }
+        cout << endl
+            << sizeof(string) << endl;  // 24
+        cout << sizeof(strArr1) << endl;  // 72
+        cout << sizeof(pStrArr1) << endl;  // 4
+        return 0;
+    }
+    ```
+
+    * 解析:
+      1. sizeof问题,第二个for中的sizeof计算的是指针大小,因此输出不全;
+      2. sizeof是个类似宏定义的特殊关键字,sizeof()括号中的内容在编译期间不被编译,而是被替代类型;
+
+         ```cpp
+         int a = 8;
+         sizeof(a);  // 被替换为sizeof(int)
+         sizeof(a=6);  // 因为a=6不被编译,所以a还是8
+         ```
+
+      3. 对函数使用sizeof,在编译阶段会被函数的返回值类型取代.
+
+8. 下面程序的结果?
+
+    ```cpp
+    #include <iostream>
+    #include <complex>
+
+    using namespace std;
+
+    class Base
+    {
+      public:
+        Base()
+        {
+            cout << "Base-ctor" << endl;
+        }
+        ~Base()
+        {
+            cout << "Base-dtor" << endl;
+        }
+        virtual void f(int)
+        {
+            cout << "Base::f(int)" << endl;
+        }
+        virtual void f(double)
+        {
+            cout << "Base::f(double)" << endl;
+        }
+        virtual void g(int i = 10)
+        {
+            cout << "Base::g()" << i << endl;
+        }
+        void g2(int i = 10)
+        {
+            cout << "Base::g2()" << i << endl;
+        }
+    };
+
+    class Derived : public Base
+    {
+      public:
+        Derived()
+        {
+            cout << "Derived-ctor" << endl;
+        }
+        ~Derived()
+        {
+            cout << "Derived-dtor" << endl;
+        }
+        void f(complex<double>)
+        {
+            cout << "Derived::f(complex)" << endl;
+        }
+        virtual void g(int i = 20)
+        {
+            cout << "Derived::g()" << i << endl;
+        }
+    };
+
+    int main(int argc, char const *argv[])
+    {
+        cout << sizeof(Base) << endl;
+        // A.4  B 32  C. 20
+        cout << sizeof(Derived) << endl;
+        // A.4  B.8  C.36
+
+        return 0;
+    }
+    ```
+
+    * 解析:
+      1. 因为只有一个指向虚函数表的指针,所以都是4.
+
+9. 下面程序的结果是?
+
+    ```cpp
+    char var[10];
+    int test(char var[]){
+      return sizeof(var);
+    }
+    ```
+
+       * 解析:退化为指针,所以结果为4.
+
+10. 下面代码的输出结果是?
+
+    ```cpp
+    class B
+    {
+      float f;
+      char p;
+      int adf[3];
+    };
+    cout << sizeof(B);
+    ```
+
+    * 解析:考虑对齐,结果为`4 + [1+3] + 12 = 20`.
+
+11. 一个空类占多少空间?多重继承的空类?
+
+    ```cpp
+    #include <iostream>
+
+    using namespace std;
+
+    class A
+    {
+    };
+    class A2
+    {
+    };
+    class B : public A
+    {
+    };
+    class C : public virtual B
+    {
+    };
+    class D : public A, public A2
+    {
+    };
+
+    int main(int argc, char const *argv[])
+    {
+        cout << "sizeof(A)" << sizeof(A) << endl;
+        cout << "sizeof(B)" << sizeof(B) << endl;
+        cout << "sizeof(C)" << sizeof(C) << endl;
+        cout << "sizeof(D)" << sizeof(D) << endl;
+
+        return 0;
+    }
+    ```
+
+    * 解析:`1 1 4 1`
+      1. 空类占1;
+      2. 单一继承的空类占1;
+      3. 多重继承的空类占1;
+      4. 虚继承涉及虚指针,占4.
+
+###### 6.4 内联函数和宏定义
+
+* 内联函数和宏的差别是?
+  1. 内联函数和普通函数比可以加快速度,因为不需要中断调用,编译时内联函数直接镶嵌到目标代码中,而宏只是简单的替换;
+  2. 内联函数要做类型检查;
+  3. 对于短小的代码,内联函数和宏都是增加空间换来效率的提升,但是内联函数在没有付出任何代价的前提下更安全;
+  4. 宏在C语言里很重要,在C++里最好永远不用;
+  5. 宏不是函数,只是在编译前(编译预处理阶段)进行字符串替换;
+  6. 关键字`inline`必须与函数定义体放在一起才能有用,是一种"用于实现的关键字",而不是"用于声明的关键字";
+  7. 内联函数以代码膨胀为代价,仅仅省去了函数调用的开销,如果函数运行时间长,那么将没有意义;
+  8. 每一处内联函数都要复制代码,使程序变大,消耗更多内存空间;
+  9. 以下情况不适用内联函数:
+     1. 函数体代码较长;
+     2. 函数体内有循环等;
+  10. 使用inline关键字,编译器决定是否使函数成为内联.
 
 ---
 
