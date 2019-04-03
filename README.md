@@ -236,6 +236,18 @@
       - [图片验证码](#图片验证码)
       - [开发流程与接口文档](#开发流程与接口文档)
       - [短信验证](#短信验证)
+    - [19-4-3](#19-4-3)
+      - [注册](#注册)
+        - [参数校验](#参数校验)
+        - [密码加密](#密码加密)
+        - [property装饰器](#property装饰器)
+        - [前端拦截表单提交](#前端拦截表单提交)
+        - [前端请求头传递csrf_token](#前端请求头传递csrf_token)
+      - [登录](#登录)
+        - [限制访问次数](#限制访问次数)
+        - [后端检查登录状态接口](#后端检查登录状态接口)
+        - [后端登出接口](#后端登出接口)
+        - [登录验证装饰器](#登录验证装饰器)
 - [6-牛客网](#6-牛客网)
     - [19-3-22](#19-3-22-1)
       - [C/C++*50](#cc50)
@@ -283,8 +295,12 @@
 - [8-电影](#8-电影)
     - [19-3-23](#19-3-23-2)
       - [大黄蜂](#大黄蜂)
+    - [19-4-3](#19-4-3-1)
+      - [海王](#海王)
 
 ---
+
+<a href="#" alt="开始" id="1" style="position:fixed;right:10%;bottom:40%;color:rgba(255,0,0,0.2);font-size:32px;text-decoration:none;">首页</a>
 
 ## 1-上位机
 
@@ -2553,7 +2569,7 @@ alias update="sudo apt update"
 1. CloudStudio中`apt update`后安装`mysql-client`和`libmysqlclient-dev`和`redis-server`.
 2. pip安装`requirements.txt`和`redis`.
 3. 免费数据库`mysql -h db4free.net -P 3306 -umy__sql -p`.
-4. 启动redis`/etc/init.d/redis-server start`.
+4. 启动redis`sudo /etc/init.d/redis-server start`.
 5. 关闭redis.
    1. `CTRL+C`.
    2. `kill pid`.
@@ -2634,6 +2650,47 @@ alias update="sudo apt update"
 1. 借助`云通讯`的sdk-python.
 2. 使用单例模式封装接口.
 3. 发送验证码前后端编写.
+
+#### 19-4-3
+
+##### 注册
+
+1. 规定接口；
+2. 规定传递的参数。
+
+###### 参数校验
+
+###### 密码加密
+
+* `from werkzeug.security import generate_password_hash`.
+
+###### property装饰器
+
+###### 前端拦截表单提交
+
+1. `e.preventDefault()`拦截表单的自动提交行为；
+2. 使用ajax处理。
+
+###### 前端请求头传递csrf_token
+
+##### 登录
+
+1. 接口；
+2. 传递的参数。
+
+###### 限制访问次数
+
+1. 使用IP地址（request.remote_addr）。存入redis。
+2. redis自动递增函数。
+
+###### 后端检查登录状态接口
+
+###### 后端登出接口
+
+###### 登录验证装饰器
+
+1. g对象保留本次访问的信息；
+2. `functools.wraps`保留被装饰函数的信息。
 
 ---
 
@@ -2747,6 +2804,8 @@ alias update="sudo apt update"
 
 * 还不错.
 
----
+#### 19-4-3
 
-<a href="#" alt="开始" id="1" style="position:fixed;right:10%;bottom:40%;color:rgba(255,0,0,0.3);font-size:32px;text-decoration:none;">首页</a>
+##### 海王
+
+---
