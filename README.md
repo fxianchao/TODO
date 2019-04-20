@@ -332,6 +332,16 @@
       - [requests库](#requests库)
         - [发送请求和获取网页字符串](#发送请求和获取网页字符串)
         - [requests发送带参数的请求](#requests发送带参数的请求)
+    - [19-4-20](#19-4-20)
+      - [requests库[续]](#requests库续)
+        - [贴吧爬虫](#贴吧爬虫)
+        - [发送POST请求](#发送post请求)
+        - [使用代理](#使用代理)
+        - [模拟登录的三种方式](#模拟登录的三种方式)
+      - [chrome分析psot和json](#chrome分析psot和json)
+        - [寻找post的地址](#寻找post的地址)
+        - [寻找js和分析js](#寻找js和分析js)
+        - [requests小技巧](#requests小技巧)
 - [6-牛客网](#6-牛客网)
     - [19-3-22](#19-3-22-1)
       - [C/C++*50](#cc50)
@@ -414,7 +424,7 @@
 
 ---
 
-<a href="#" alt="开始" id="1" style="position:fixed;right:10%;bottom:40%;color:rgba(255,0,0,0.2);font-size:32px;text-decoration:none;">首页</a>
+<!-- <a href="#" alt="开始" id="1" style="position:fixed;right:10%;bottom:40%;color:rgba(255,0,0,0.2);font-size:32px;text-decoration:none;">首页</a> -->
 
 ## 1-上位机
 
@@ -3426,6 +3436,63 @@ alias update="sudo apt update"
 ###### requests发送带参数的请求
 
 * `r = requests.get(url,headers=headers)`.
+
+#### 19-4-20
+
+##### requests库[续]
+
+###### 贴吧爬虫
+
+###### 发送POST请求
+
+* `r = requests.post("http://www.baidu.com/", data = data)`
+
+###### 使用代理
+
+1. 代理分类
+    1. 反向代理nginx,浏览器不知道最终服务器的地址.
+    2. 正向代理,浏览器知道最终服务器的地址.
+2. 作用
+    1. 隐藏真实地址;
+    2. 避免服务器识别同一客户.
+
+###### 模拟登录的三种方式
+
+1. cookie和session的区别
+    1. cookie浏览器,session服务器.
+2. 使用requests中封装的session来保存登录信息.
+3. 获取登录后的页面的三种方式
+    1. 实例化session，使用session发送post请求，在使用他获取登陆后的页面
+    2. headers中添加cookie键，值为cookie字符串
+    3. 在请求方法中添加cookies参数，接收字典形式的cookie。字典形式的cookie中的键是cookie的name对应的值，值是cookie的value对应的值
+
+##### chrome分析psot和json
+
+###### 寻找post的地址
+
+1. 在form表单中寻找action对应的url地址
+    1. post的数据是input标签中name的值作为键，真正的用户名密码作为值的字典，post的url地址就是action对应的url地址
+2. 抓包，寻找登录的url地址
+    1. 勾选perserve log按钮，防止页面跳转找不到url
+    2. 寻找post数据，确定参数
+        1. 参数不会变，直接用，比如密码不是动态加密的时候
+        2. 参数会变
+            1. 参数在当前的响应中
+            2. 通过js生成
+
+###### 寻找js和分析js
+
+1. 选择会触发js时间的按钮，点击event listener，找到js的位置
+2. 通过chrome中的search all file来搜索url中关键字
+3. 添加断点的方式来查看js的操作，通过python来进行同样的操作
+
+###### requests小技巧
+
+1. 将CookieJar转为字典`requests.utils.dict_from_cookiejar(cookiejar)`
+2. url编解码`requests.utils.quote`
+3. ssl证书验证`verify=True|False`
+4. 超时参数`timeout=10`
+5. python模块`retrying`,重复多次
 
 ---
 
