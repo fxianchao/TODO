@@ -342,6 +342,11 @@
         - [寻找post的地址](#寻找post的地址)
         - [寻找js和分析js](#寻找js和分析js)
         - [requests小技巧](#requests小技巧)
+    - [19-4-21](#19-4-21)
+      - [json数据处理](#json数据处理)
+        - [数据的分类](#数据的分类)
+        - [json模块](#json模块)
+        - [豆瓣爬虫练习](#豆瓣爬虫练习)
 - [6-牛客网](#6-牛客网)
     - [19-3-22](#19-3-22-1)
       - [C/C++*50](#cc50)
@@ -3493,6 +3498,26 @@ alias update="sudo apt update"
 3. ssl证书验证`verify=True|False`
 4. 超时参数`timeout=10`
 5. python模块`retrying`,重复多次
+
+#### 19-4-21
+
+##### json数据处理
+
+###### 数据的分类
+
+1. 非结构化数据
+    1. 正则
+    2. xpath
+2. 结构化数据
+
+###### json模块
+
+1. json->python,`json.loads()`
+2. python->json,`json.dumps()`
+3. 使用`json.load`提取类文件对象中的数据
+4. `json.dump`能够把python类型放入类文件对象中
+
+###### 豆瓣爬虫练习
 
 ---
 
