@@ -57,6 +57,11 @@
       - [踢除用户](#踢除用户)
     - [19-4-13](#19-4-13)
       - [软件升级](#软件升级-1)
+    - [19-4-24](#19-4-24)
+      - [软件升级](#软件升级-2)
+      - [开机启动服务管理](#开机启动服务管理)
+      - [安装配置docker](#安装配置docker)
+      - [配置免密登录](#配置免密登录)
 - [3-程序员面试宝典](#3-程序员面试宝典)
   - [19-3-28](#19-3-28)
     - [第一部分 求职过程](#第一部分-求职过程)
@@ -362,6 +367,15 @@
         - [百度爬虫](#百度爬虫)
         - [糗事百科爬虫](#糗事百科爬虫)
         - [多线程爬虫](#多线程爬虫)
+    - [19-4-24](#19-4-24-1)
+      - [爬取动态html数据](#爬取动态html数据)
+        - [动态HTML技术](#动态html技术)
+        - [Selenium](#selenium)
+        - [PhantomJS](#phantomjs)
+        - [豆瓣登陆案例](#豆瓣登陆案例)
+        - [验证码的识别](#验证码的识别)
+        - [selenium使用的注意点](#selenium使用的注意点)
+        - [使用Tesseract](#使用tesseract)
 - [6-牛客网](#6-牛客网)
     - [19-3-22](#19-3-22-1)
       - [C/C++*50](#cc50)
@@ -964,7 +978,7 @@ alias update="sudo apt update"
 ##### 终端配色
 
 1. 在`.bashrc`中打开`force_color_prompt=yes`,打开彩色终端.
-2. 配置`PS1='${debian_chroot:+($debian_chroot)}\[\033[03;34;01m\]\u\[\033[00;32;01m\]@\[\033[01;31;01m\]\h\[\033[00;37;01m\]:\[\033[01;35;01m\]\w \[\033[01;33;01m\]\$ \[\033[00;36;01m\]'`.
+2. 配置`PS1='${debian_chroot:+($debian_chroot)}\[\033[03;34;01m\][\u\[\033[00;32;01m\]@\[\033[01;31;01m\]\h\[\033[00;37;01m\]: \[\033[01;35;01m\]\w]\n\[\033[01;33;01m\]->\[\033[0m\]'`.
 
 ##### mysql客户端
 
@@ -982,6 +996,44 @@ alias update="sudo apt update"
 #### 19-4-13
 
 ##### 软件升级
+
+`upgrade`
+
+#### 19-4-24
+
+##### 软件升级
+
+`upgrade`
+
+##### 开机启动服务管理
+
+1. `systemctl is-enabled servicename.service` # 查询服务是否开机启动
+2. `systemctl enable *.service` # 开机运行服务
+3. `systemctl disable *.service` # 取消开机运行
+4. `systemctl start *.service` # 启动服务
+5. `systemctl stop *.service` # 停止服务
+6. `systemctl restart *.service` # 重启服务
+7. `systemctl reload *.service` # 重新加载服务配置文件
+8. `systemctl status *.service` # 查询服务运行状态
+
+##### 安装配置docker
+
+1. 官方命令直装`wget -qO- https://get.docker.com/ | sh`;
+2. 将当前用户加入特定用户组`sudo usermod -aG docker ubuntu`;
+3. 关闭开机启动`systemctl disable docker`;
+4. 配置加速,向`/etc/docker/daemon.json`中写入`{"registry-mirrors": ["https://mirror.ccs.tencentyun.com"]}`,然后重启;
+5. 查找镜像`docker search hello-world`;
+6. 拉取镜像`docker pull hello-world`;
+7. 查看镜像`docker images`;
+8. 运行镜像`docker run hello-world`;
+9. 查看容器`docker container ls -al`;
+10. 删除容器`docker container rm **`;
+11. 删除镜像`docker rmi ***`;
+
+##### 配置免密登录
+
+1. 本机`scp .ssh/id_rsa.pub ubuntu@...:/home/ubuntu/id_rsa.pub.buf`;
+2. 远程`cat id_rsa.pub.buf >> .ssh/authorized_keys && chmod 600 .ssh/authorized_keys`.
 
 ---
 
@@ -3632,6 +3684,64 @@ alias update="sudo apt update"
 ###### 糗事百科爬虫
 
 ###### 多线程爬虫
+
+#### 19-4-24
+
+##### 爬取动态html数据
+
+###### 动态HTML技术
+
+1. `JS`;
+2. `JQuery`;
+3. `Ajax`.
+
+###### Selenium
+
+1. 是一个Web的自动化测试工具，最初是为网站自动化测试而开发的，类型像我们玩游戏用的按键精灵，可以按指定的命令自动操作，不同是Selenium 可以直接运行在浏览器上，它支持所有主流的浏览器（包括PhantomJS这些无界面的浏览器）。
+2. Selenium 可以根据我们的指令，让浏览器自动加载页面，获取需要的数据，甚至页面截屏，或者判断网站上某些动作是否发生.
+3. Selenium 自己不带浏览器，不支持浏览器的功能，它需要与第三方浏览器结合在一起才能使用。但是我们有时候需要让它内嵌在代码中运行，所以我们可以用一个叫 PhantomJS 的工具代替真实的浏览器.
+
+###### PhantomJS
+
+* PhantomJS 是一个基于Webkit的“无界面”(headless)浏览器，它会把网站加载到内存并执行页面上的 JavaScript，因为不会展示图形界面，所以运行起来比完整的浏览器要高效.
+
+###### 豆瓣登陆案例
+
+###### 验证码的识别
+
+1. url不变，验证码不变
+    1. 请求验证码的地址，获得相应，识别
+2. url不变，验证码会变
+    1. 思路：对方服务器返回验证码的时候，会和每个用户的信息和验证码进行一个对应，之后，在用户发送post请求的时候，会对比post请求中发的验证码和当前用户真正的存储在服务器端的验证码是否相同
+        1. 实例化session
+        2. 使用seesion请求登录页面，获取验证码的地址
+        3. 使用session请求验证码，识别
+        4. 使用session发送post请求
+3. 使用selenium登录，遇到验证码
+    1. url不变，验证码不变，同上
+    2. url不变，验证码会变
+        1. selenium请求登录页面，同时拿到验证码的地址
+        2. 获取登录页面中driver中的cookie，交给requests模块发送验证码的请求，识别
+        3. 输入验证码，点击登录
+
+###### selenium使用的注意点
+
+1. 获取文本和获取属性
+    2. 先定位到元素，然后调用`.text`或者`get_attribute`方法来去
+2. selenium获取的页面数据是浏览器中elements的内容
+3. find_element和find_elements的区别
+    1. find_element返回一个element，如果没有会报错
+    2. find_elements返回一个列表，没有就是空列表
+    3. 在判断是否有下一页的时候，使用find_elements来根据结果的列表长度来判断
+4. 如果页面中含有iframe、frame，需要先调用driver.switch_to.frame的方法切换到frame中才能定位元素
+5. selenium请求第一页的时候回等待页面加载完了之后在获取数据，但是在点击翻页之后，hi直接获取数据，此时可能会报错，因为数据还没有加载出来，需要time.sleep(3)
+6. selenium中find_element_by_class_name智能接收一个class对应的一个值，不能传入多个
+
+###### 使用Tesseract
+
+1. 图像翻译为文字的`OCR`库;
+2. `sudo apt install tesseract-ocr`;
+3. `pip install pytesseract`. 
 
 ---
 
