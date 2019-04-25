@@ -376,6 +376,9 @@
         - [验证码的识别](#验证码的识别)
         - [selenium使用的注意点](#selenium使用的注意点)
         - [使用Tesseract](#使用tesseract)
+    - [19-4-25](#19-4-25)
+      - [斗鱼爬虫](#斗鱼爬虫)
+      - [mongodb介绍及安装](#mongodb介绍及安装)
 - [6-牛客网](#6-牛客网)
     - [19-3-22](#19-3-22-1)
       - [C/C++*50](#cc50)
@@ -1045,43 +1048,59 @@ alias update="sudo apt update"
 
 ##### 第1章 应聘求职
 
-[挖坑待填](#)
-
 ###### 渠道
+
+[挖坑待填](#)
 
 ###### 流程
 
-##### 第2章 简历书写
-
 [挖坑待填](#)
+
+##### 第2章 简历书写
 
 ###### 简历注意事项
 
+[挖坑待填](#)
+
 ###### 简历模板
+
+[挖坑待填](#)
 
 ##### 第3章 求职五部曲
 
-[挖坑待填](#)
-
 ###### 笔试
+
+[挖坑待填](#)
 
 ###### 电话面试
 
+[挖坑待填](#)
+
 ###### 面试
-
-###### 签约
-
-###### 违约
-
-##### 第4章 职业生涯发展规划
 
 [挖坑待填](#)
 
+###### 签约
+
+[挖坑待填](#)
+
+###### 违约
+
+[挖坑待填](#)
+
+##### 第4章 职业生涯发展规划
+
 ###### 缺乏工作经验的应届毕业生
+
+[挖坑待填](#)
 
 ###### 更换工作的程序员
 
+[挖坑待填](#)
+
 ###### 快乐的工作
+
+[挖坑待填](#)
 
 #### 第二部分 C/Cpp程序设计
 
@@ -3742,6 +3761,24 @@ alias update="sudo apt update"
 1. 图像翻译为文字的`OCR`库;
 2. `sudo apt install tesseract-ocr`;
 3. `pip install pytesseract`. 
+
+#### 19-4-25
+
+##### 斗鱼爬虫
+
+##### mongodb介绍及安装
+
+1. `NO-SQL`,非关系型数据库,`Not Only SQL`.
+2. 安装`sudo apt install -y mongodb`;
+3. 卸载`sudo apt --purge remove mongodb mongodb-clients mongodb-server`;
+4. 启动`sudo service mongodb start`;
+5. 停止`sudo service mongodb stop`;
+6. 重启`sudo service mongodb restart`;
+7. 查看启动成功`pgrep mongo -l`;
+8. 配置文件`/etc/mongod.conf`;
+9. 端口`27017`;
+10. 日志`/var/log/mongodb/mongod.log`;
+11. 启动终端`mongo`.
 
 ---
 
