@@ -33,12 +33,12 @@
     - [~~新建虚拟环境`flask_p3`~~](#新建虚拟环境flask_p3)
     - [~~安装nginx~~](#安装nginx)
   - [19-3-25](#19-3-25)
-    - [重装](#重装)
-    - [软件升级](#软件升级)
-    - [安装pip3](#安装pip3)
-    - [安装venv](#安装venv)
-    - [新建虚拟环境`flask_p3`](#新建虚拟环境flask_p3)
-    - [修改`.bashrc`简化命令](#修改bashrc简化命令)
+    - [~~重装~~](#重装-1)
+    - [~~软件升级~~](#软件升级-2)
+    - [~~安装pip3~~](#安装pip3-1)
+    - [~~安装venv~~](#安装venv)
+    - [~~新建虚拟环境`flask_p3`~~](#新建虚拟环境flask_p3-1)
+    - [~~修改`.bashrc`简化命令~~](#修改bashrc简化命令)
     - [安装配置nginx](#安装配置nginx)
   - [19-3-26](#19-3-26)
     - [配置微信公众号服务器](#配置微信公众号服务器)
@@ -49,22 +49,35 @@
     - [切换用户](#切换用户)
     - [查看当前登录用户](#查看当前登录用户)
   - [19-3-30](#19-3-30)
-    - [软件更新](#软件更新)
+    - [~~软件更新~~](#软件更新)
     - [内核](#内核)
-    - [配置vim](#配置vim)
-    - [终端配色](#终端配色)
-    - [mysql客户端](#mysql客户端)
+    - [~~配置vim~~](#配置vim)
+    - [~~终端配色~~](#终端配色)
+    - [~~mysql客户端~~](#mysql客户端)
     - [踢除用户](#踢除用户)
   - [19-4-13](#19-4-13)
-    - [软件升级](#软件升级-1)
+    - [~~软件升级~~](#软件升级-3)
   - [19-4-24](#19-4-24)
-    - [软件升级](#软件升级-2)
+    - [~~软件升级~~](#软件升级-4)
     - [开机启动服务管理](#开机启动服务管理)
-    - [安装配置docker](#安装配置docker)
+    - [~~安装配置docker~~](#安装配置docker)
     - [配置免密登录](#配置免密登录)
   - [19-4-26](#19-4-26)
-    - [软件升级](#软件升级-3)
+    - [~~软件升级~~](#软件升级-5)
+    - [~~配置Git~~](#配置git)
+  - [19-4-27](#19-4-27)
+    - [宕机,重装](#宕机重装)
+    - [软件升级](#软件升级)
+    - [安装pip3](#安装pip3)
+    - [安装venv](#安装venv)
+    - [新建虚拟环境`py3`](#新建虚拟环境py3)
+    - [借助`.bash_aliases`简化命令](#借助bash_aliases简化命令)
+    - [配置vim](#配置vim)
+    - [终端配色](#终端配色)
+    - [安装mysql客户端](#安装mysql客户端)
+    - [安装配置docker](#安装配置docker)
     - [配置Git](#配置git)
+    - [自动备份脚本](#自动备份脚本)
 - [3-程序员面试宝典](#3-程序员面试宝典)
   - [19-3-28](#19-3-28)
     - [第一部分 求职过程](#第一部分-求职过程)
@@ -95,14 +108,17 @@
         - [5.7 c和c++的关系](#57-c和c的关系)
         - [5.8 程序设计的其他问题](#58-程序设计的其他问题)
   - [19-3-29](#19-3-29)
+    - [第二部分 C/Cpp程序设计[续]](#第二部分-ccpp程序设计续)
       - [第6章 预处理,const与sizeof](#第6章-预处理const与sizeof)
         - [6.1 宏定义](#61-宏定义)
         - [6.2 const](#62-const)
   - [19-4-2](#19-4-2)
+    - [第二部分 C/Cpp程序设计[续]](#第二部分-ccpp程序设计续-1)
       - [第6章(续)](#第6章续)
         - [6.3 sizeof](#63-sizeof)
         - [6.4 内联函数和宏定义](#64-内联函数和宏定义)
   - [19-4-4](#19-4-4)
+    - [第二部分 C/Cpp程序设计[续]](#第二部分-ccpp程序设计续-2)
       - [第7章 指针与引用](#第7章-指针与引用)
         - [7.1 指针基本问题](#71-指针基本问题)
         - [7.2 传递动态内存](#72-传递动态内存)
@@ -226,171 +242,172 @@
         - [其他实现](#其他实现)
         - [标注](#标注)
 - [5-黑马python](#5-黑马python)
-    - [~~>>>15-flask教程{19-3-21}~~](#15-flask教程19-3-21)
-        - [路由模块](#路由模块)
-        - [模板引擎](#模板引擎)
-        - [操作数据库](#操作数据库)
-        - [表单](#表单)
-        - [扩展命令行](#扩展命令行)
-        - [认证用户状态](#认证用户状态)
-        - [开发REST API的工具](#开发rest-api的工具)
-        - [集成前端Twitter Bootstrap框架](#集成前端twitter-bootstrap框架)
-        - [本地化日期和时间](#本地化日期和时间)
-        - [反向解析](#反向解析)
-        - [JSON数据](#json数据)
-      - [19-3-20](#19-3-20-1)
-        - [数据库迁移](#数据库迁移)
-        - [邮箱扩展](#邮箱扩展)
-        - [模块划分,循环引用,蓝图](#模块划分循环引用蓝图)
-      - [19-3-21](#19-3-21-1)
-        - [单元测试](#单元测试)
-        - [部署](#部署)
-    - [~~>>>16-微信公众号{19-3-23}~~](#16-微信公众号19-3-23)
-      - [19-3-23](#19-3-23-1)
-        - [微信公众号服务器配置](#微信公众号服务器配置)
-        - [收发消息,事件](#收发消息事件)
-        - [微信网页授权](#微信网页授权)
-    - [~~>>>17-flask项目-爱家租房{19-4-12}~~](#17-flask项目-爱家租房19-4-12)
-      - [19-3-29](#19-3-29-1)
-        - [前后端分离](#前后端分离)
-        - [项目文件目录结构](#项目文件目录结构)
-        - [日志功能](#日志功能)
-      - [19-3-30](#19-3-30-1)
-        - [数据表设计](#数据表设计)
-        - [日志系统bug](#日志系统bug)
-        - [数据库迁移](#数据库迁移-1)
+  - [~~>>>15-flask教程{19-3-21}~~](#15-flask教程19-3-21)
+    - [??-??-??](#--)
+      - [路由模块=Werkzeug](#路由模块werkzeug)
+      - [模板引擎=jinja2](#模板引擎jinja2)
+      - [操作数据库=Flask-SQLalchemy](#操作数据库flask-sqlalchemy)
+      - [表单=Flask-WTF](#表单flask-wtf)
+      - [扩展命令行=Flask-script](#扩展命令行flask-script)
+      - [认证用户状态=Flask-Login](#认证用户状态flask-login)
+      - [开发REST API的工具=Flask-RESTful](#开发rest-api的工具flask-restful)
+      - [集成前端Twitter Bootstrap框架=Flask-Bootstrap](#集成前端twitter-bootstrap框架flask-bootstrap)
+      - [本地化日期和时间=Flask-Moment](#本地化日期和时间flask-moment)
+      - [反向解析=url_for](#反向解析url_for)
+      - [JSON数据=jsonify](#json数据jsonify)
+    - [19-3-20](#19-3-20-1)
+      - [数据库迁移=Flask-Migrate](#数据库迁移flask-migrate)
+      - [邮箱扩展=Flask-Mail](#邮箱扩展flask-mail)
+      - [模块划分,循环引用,蓝图](#模块划分循环引用蓝图)
+    - [19-3-21](#19-3-21-1)
+      - [单元测试](#单元测试)
+      - [部署](#部署)
+  - [~~>>>16-微信公众号{19-3-23}~~](#16-微信公众号19-3-23)
+    - [19-3-23](#19-3-23-1)
+      - [微信公众号服务器配置](#微信公众号服务器配置)
+      - [收发消息,事件](#收发消息事件)
+      - [微信网页授权](#微信网页授权)
+  - [~~>>>17-flask项目-爱家租房{19-4-12}~~](#17-flask项目-爱家租房19-4-12)
+    - [19-3-29](#19-3-29-1)
+      - [前后端分离](#前后端分离)
+      - [项目文件目录结构](#项目文件目录结构)
+      - [日志功能](#日志功能)
+    - [19-3-30](#19-3-30-1)
+      - [数据表设计](#数据表设计)
+      - [日志系统bug](#日志系统bug)
+      - [数据库迁移](#数据库迁移)
       - [19-3-31](#19-3-31)
-        - [静态文件接口](#静态文件接口)
-        - [csrf防护](#csrf防护)
-        - [图片验证码](#图片验证码)
-        - [开发流程与接口文档](#开发流程与接口文档)
-        - [短信验证](#短信验证)
-      - [19-4-3](#19-4-3)
-        - [注册](#注册)
-          - [参数校验](#参数校验)
-          - [密码加密](#密码加密)
-          - [property装饰器](#property装饰器)
-          - [前端拦截表单提交](#前端拦截表单提交)
-          - [前端请求头传递csrf_token](#前端请求头传递csrf_token)
-        - [登录](#登录)
-          - [限制访问次数](#限制访问次数)
-          - [后端检查登录状态接口](#后端检查登录状态接口)
-          - [后端登出接口](#后端登出接口)
-          - [登录验证装饰器](#登录验证装饰器)
-      - [19-4-4](#19-4-4-1)
-        - [图片服务](#图片服务)
-          - [搭建文件存储系统](#搭建文件存储系统)
-          - [第三方服务](#第三方服务)
-          - [前端异步提交](#前端异步提交)
-        - [城区信息--缓存](#城区信息--缓存)
-          - [缓存的同步问题](#缓存的同步问题)
-        - [前端模板](#前端模板)
-      - [19-4-6](#19-4-6-1)
-        - [发布房源](#发布房源)
-          - [保存房屋基本信息后端](#保存房屋基本信息后端)
-          - [保存房屋图片信息后端](#保存房屋图片信息后端)
-          - [保存房屋信息前端](#保存房屋信息前端)
-      - [19-4-7](#19-4-7)
-        - [celery](#celery)
-          - [celery模型](#celery模型)
-          - [celery使用](#celery使用)
-          - [celery目录结构](#celery目录结构)
-          - [celery独立的目录使用](#celery独立的目录使用)
-          - [celery接收返回值](#celery接收返回值)
-      - [19-4-9](#19-4-9-1)
-        - [房屋管理](#房屋管理)
-          - [展示我的房源](#展示我的房源)
-          - [显示主页数据](#显示主页数据)
-          - [房屋详情数据](#房屋详情数据)
-      - [19-4-11](#19-4-11)
-        - [房屋列表](#房屋列表)
-          - [过滤规则](#过滤规则)
-          - [缓存处理](#缓存处理)
-        - [订单](#订单)
-          - [时间处理](#时间处理)
-          - [保存订单](#保存订单)
-          - [查询订单](#查询订单)
-          - [接单/拒单](#接单拒单)
-          - [评论](#评论)
-        - [订单支付](#订单支付)
-          - [支付宝接入流程](#支付宝接入流程)
-          - [手机网站支付流程](#手机网站支付流程)
-      - [19-4-12](#19-4-12-1)
-        - [订单支付(续)](#订单支付续)
-          - [支付宝密钥与SDK使用](#支付宝密钥与sdk使用)
-          - [支付宝支付后端接口](#支付宝支付后端接口)
-          - [获取支付结果修改订单](#获取支付结果修改订单)
-        - [项目优化](#项目优化)
-          - [csrf_token丢失bug的解决](#csrf_token丢失bug的解决)
-          - [数据库优化](#数据库优化)
+      - [静态文件接口](#静态文件接口)
+      - [csrf防护](#csrf防护)
+      - [图片验证码](#图片验证码)
+      - [开发流程与接口文档](#开发流程与接口文档)
+      - [短信验证](#短信验证)
+    - [19-4-3](#19-4-3)
+      - [注册](#注册)
+        - [参数校验](#参数校验)
+        - [密码加密](#密码加密)
+        - [property装饰器](#property装饰器)
+        - [前端拦截表单提交](#前端拦截表单提交)
+        - [前端请求头传递csrf_token](#前端请求头传递csrf_token)
+      - [登录](#登录)
+        - [限制访问次数](#限制访问次数)
+        - [后端检查登录状态接口](#后端检查登录状态接口)
+        - [后端登出接口](#后端登出接口)
+        - [登录验证装饰器](#登录验证装饰器)
+    - [19-4-4](#19-4-4-1)
+      - [图片服务](#图片服务)
+        - [搭建文件存储系统](#搭建文件存储系统)
+        - [第三方服务](#第三方服务)
+        - [前端异步提交](#前端异步提交)
+      - [城区信息--缓存](#城区信息--缓存)
+        - [缓存的同步问题](#缓存的同步问题)
+      - [前端模板](#前端模板)
+    - [19-4-6](#19-4-6-1)
+      - [发布房源](#发布房源)
+        - [保存房屋基本信息后端](#保存房屋基本信息后端)
+        - [保存房屋图片信息后端](#保存房屋图片信息后端)
+        - [保存房屋信息前端](#保存房屋信息前端)
+    - [19-4-7](#19-4-7)
+      - [celery](#celery)
+        - [celery模型](#celery模型)
+        - [celery使用](#celery使用)
+        - [celery目录结构](#celery目录结构)
+        - [celery独立的目录使用](#celery独立的目录使用)
+        - [celery接收返回值](#celery接收返回值)
+    - [19-4-9](#19-4-9-1)
+      - [房屋管理](#房屋管理)
+        - [展示我的房源](#展示我的房源)
+        - [显示主页数据](#显示主页数据)
+        - [房屋详情数据](#房屋详情数据)
+    - [19-4-11](#19-4-11)
+      - [房屋列表](#房屋列表)
+        - [过滤规则](#过滤规则)
+        - [缓存处理](#缓存处理)
+      - [订单](#订单)
+        - [时间处理](#时间处理)
+        - [保存订单](#保存订单)
+        - [查询订单](#查询订单)
+        - [接单/拒单](#接单拒单)
+        - [评论](#评论)
+      - [订单支付](#订单支付)
+        - [支付宝接入流程](#支付宝接入流程)
+        - [手机网站支付流程](#手机网站支付流程)
+    - [19-4-12](#19-4-12-1)
+      - [订单支付(续)](#订单支付续)
+        - [支付宝密钥与SDK使用](#支付宝密钥与sdk使用)
+        - [支付宝支付后端接口](#支付宝支付后端接口)
+        - [获取支付结果修改订单](#获取支付结果修改订单)
+      - [项目优化](#项目优化)
+        - [csrf_token丢失bug的解决](#csrf_token丢失bug的解决)
+        - [数据库优化](#数据库优化)
           - [工作流程](#工作流程)
-    - [>>>18-通用爬虫模块](#18-通用爬虫模块)
-      - [19-4-14](#19-4-14)
-        - [爬虫基本概念](#爬虫基本概念)
-          - [课程介绍和概念](#课程介绍和概念)
-          - [爬虫的分类](#爬虫的分类)
-          - [markdown介绍](#markdown介绍)
-          - [robots协议](#robots协议)
-          - [HTTP和HTTPS协议](#http和https协议)
-          - [浏览器发送HTTP请求的过程](#浏览器发送http请求的过程)
-      - [19-4-19](#19-4-19)
+  - [>>>18-通用爬虫模块](#18-通用爬虫模块)
+    - [19-4-14](#19-4-14)
+      - [爬虫基本概念](#爬虫基本概念)
+        - [课程介绍和概念](#课程介绍和概念)
+        - [爬虫的分类](#爬虫的分类)
+        - [markdown介绍](#markdown介绍)
+        - [robots协议](#robots协议)
+        - [HTTP和HTTPS协议](#http和https协议)
+        - [浏览器发送HTTP请求的过程](#浏览器发送http请求的过程)
+    - [19-4-19](#19-4-19)
         - [爬虫基本概念[续]](#爬虫基本概念续)
           - [URL和HTTP请求格式](#url和http请求格式)
           - [字符串类型](#字符串类型)
         - [requests库](#requests库)
           - [发送请求和获取网页字符串](#发送请求和获取网页字符串)
           - [requests发送带参数的请求](#requests发送带参数的请求)
-      - [19-4-20](#19-4-20)
-        - [requests库[续]](#requests库续)
-          - [贴吧爬虫](#贴吧爬虫)
-          - [发送POST请求](#发送post请求)
-          - [使用代理](#使用代理)
-          - [模拟登录的三种方式](#模拟登录的三种方式)
-        - [chrome分析psot和json](#chrome分析psot和json)
+    - [19-4-20](#19-4-20)
+      - [requests库[续]](#requests库续)
+        - [贴吧爬虫](#贴吧爬虫)
+        - [发送POST请求](#发送post请求)
+        - [使用代理](#使用代理)
+        - [模拟登录的三种方式](#模拟登录的三种方式)
+      - [chrome分析psot和json](#chrome分析psot和json)
           - [寻找post的地址](#寻找post的地址)
           - [寻找js和分析js](#寻找js和分析js)
           - [requests小技巧](#requests小技巧)
-      - [19-4-21](#19-4-21)
-        - [json数据处理](#json数据处理)
-          - [数据的分类](#数据的分类)
-          - [json模块](#json模块)
-          - [豆瓣爬虫练习](#豆瓣爬虫练习)
-      - [19-4-22](#19-4-22)
-        - [正则处理](#正则处理)
-          - [正则和原始字符串](#正则和原始字符串)
-          - [内涵段子爬虫](#内涵段子爬虫)
-      - [19-4-23](#19-4-23)
-        - [XPATN处理数据](#xpatn处理数据)
-          - [了解XML](#了解xml)
-          - [XPATH](#xpath)
-          - [lxml库](#lxml库)
-        - [通用爬虫案例](#通用爬虫案例)
-          - [xpath的包含](#xpath的包含)
-          - [实现爬虫的套路](#实现爬虫的套路)
-          - [百度爬虫](#百度爬虫)
-          - [糗事百科爬虫](#糗事百科爬虫)
-          - [多线程爬虫](#多线程爬虫)
-      - [19-4-24](#19-4-24-1)
-        - [爬取动态html数据](#爬取动态html数据)
-          - [动态HTML技术](#动态html技术)
-          - [Selenium](#selenium)
-          - [PhantomJS](#phantomjs)
-          - [豆瓣登陆案例](#豆瓣登陆案例)
-          - [验证码的识别](#验证码的识别)
-          - [selenium使用的注意点](#selenium使用的注意点)
-          - [使用Tesseract](#使用tesseract)
-      - [19-4-25](#19-4-25)
-        - [斗鱼爬虫](#斗鱼爬虫)
-        - [mongodb介绍及安装](#mongodb介绍及安装)
-      - [19-4-26](#19-4-26-1)
-        - [mongodb增删改查](#mongodb增删改查)
-          - [基础命令](#基础命令)
-          - [集合](#集合-1)
-          - [数据类型](#数据类型)
-          - [mongodb插入数据](#mongodb插入数据)
-          - [mongodb查询数据](#mongodb查询数据)
-          - [mongodb更新数据](#mongodb更新数据)
-          - [mongodb删除](#mongodb删除)
+    - [19-4-21](#19-4-21)
+      - [json数据处理](#json数据处理)
+        - [数据的分类](#数据的分类)
+        - [json模块](#json模块)
+        - [豆瓣爬虫练习](#豆瓣爬虫练习)
+    - [19-4-22](#19-4-22)
+      - [正则处理](#正则处理)
+        - [正则和原始字符串](#正则和原始字符串)
+        - [内涵段子爬虫](#内涵段子爬虫)
+    - [19-4-23](#19-4-23)
+      - [XPATN处理数据](#xpatn处理数据)
+        - [了解XML](#了解xml)
+        - [XPATH](#xpath)
+        - [lxml库](#lxml库)
+      - [通用爬虫案例](#通用爬虫案例)
+        - [xpath的包含](#xpath的包含)
+        - [实现爬虫的套路](#实现爬虫的套路)
+        - [百度爬虫](#百度爬虫)
+        - [糗事百科爬虫](#糗事百科爬虫)
+        - [多线程爬虫](#多线程爬虫)
+    - [19-4-24](#19-4-24-1)
+      - [爬取动态html数据](#爬取动态html数据)
+        - [动态HTML技术](#动态html技术)
+        - [Selenium](#selenium)
+        - [PhantomJS](#phantomjs)
+        - [豆瓣登陆案例](#豆瓣登陆案例)
+        - [验证码的识别](#验证码的识别)
+        - [selenium使用的注意点](#selenium使用的注意点)
+        - [使用Tesseract](#使用tesseract)
+    - [19-4-25](#19-4-25)
+      - [斗鱼爬虫](#斗鱼爬虫)
+      - [mongodb介绍及安装](#mongodb介绍及安装)
+    - [19-4-26](#19-4-26-1)
+      - [mongodb增删改查](#mongodb增删改查)
+        - [基础命令](#基础命令)
+        - [集合](#集合-1)
+        - [数据类型](#数据类型)
+        - [mongodb插入数据](#mongodb插入数据)
+        - [mongodb查询数据](#mongodb查询数据)
+        - [mongodb更新数据](#mongodb更新数据)
+        - [mongodb删除数据](#mongodb删除数据)
 - [6-牛客网](#6-牛客网)
   - [19-3-22](#19-3-22-1)
     - [C/C++*50](#cc50)
@@ -403,65 +420,65 @@
   - [19-3-31](#19-3-31-1)
     - [c/c++*50](#cc50-1)
 - [~~7-WTFPython{19-4-7}~~](#7-wtfpython19-4-7)
-      - [19-3-21](#19-3-21-2)
-        - [section-大脑运动](#section-大脑运动)
-          - [微妙的字符串驻留](#微妙的字符串驻留)
-          - [python字典键覆盖](#python字典键覆盖)
-          - [try语句块的return](#try语句块的return)
-          - [Python会将相同的内存地址分配给第二个对象](#python会将相同的内存地址分配给第二个对象)
-          - [for语句每次都会重新赋值](#for语句每次都会重新赋值)
-          - [执行时机差异](#执行时机差异)
-          - [is和==,-5~256已经分配](#is和-5256已经分配)
-          - [引用相同对象](#引用相同对象)
-          - [闭包函数与循环变量绑定](#闭包函数与循环变量绑定)
-          - [is not是一个二元运算符](#is-not是一个二元运算符)
-          - [以外的逗号](#以外的逗号)
-          - [字符串末尾的反斜杠](#字符串末尾的反斜杠)
-          - [运算符的优先级会影响表达式的求值顺序](#运算符的优先级会影响表达式的求值顺序)
-          - [三引号](#三引号)
-          - [不存在的午夜?](#不存在的午夜)
-          - [布尔是int的子类](#布尔是int的子类)
-          - [类属性和实例属性](#类属性和实例属性)
-          - [生成器与list](#生成器与list)
-          - [tuple也可以改变](#tuple也可以改变)
-          - [try语句块在except子句的末尾清除该异常](#try语句块在except子句的末尾清除该异常)
-          - [真与假(python2)](#真与假python2)
-          - [原地修改没有返回值](#原地修改没有返回值)
-          - [子类](#子类)
-          - [python字典键转换](#python字典键转换)
-          - [赋值语句表达式列表,循环赋值](#赋值语句表达式列表循环赋值)
-      - [19-3-28](#19-3-28-3)
-        - [section-外表是靠不住的](#section-外表是靠不住的)
-          - [即使外表和英文字母一样,但并不一样](#即使外表和英文字母一样但并不一样)
-          - [内存空间被释放后重新分配相同地址](#内存空间被释放后重新分配相同地址)
-          - [不要混用制表符和空格](#不要混用制表符和空格)
-      - [19-4-7](#19-4-7-1)
-        - [section-小心地雷](#section-小心地雷)
-          - [不支持迭代字典时修改它,字典自动扩容](#不支持迭代字典时修改它字典自动扩容)
-          - [del引用计数减1](#del引用计数减1)
-          - [迭代列表时删除元素](#迭代列表时删除元素)
-          - [for循环,循环变量泄露](#for循环循环变量泄露)
-          - [默认的可变参数只绑定一次](#默认的可变参数只绑定一次)
-          - [捕获异常](#捕获异常)
-          - [+=与+不同](#与不同)
-          - [修改外部作用域变量,global](#修改外部作用域变量global)
-          - [链式操作](#链式操作)
-          - [类定义中嵌套的作用域忽略类作用域的名称解析](#类定义中嵌套的作用域忽略类作用域的名称解析)
-          - [元组的逗号](#元组的逗号)
-        - [section-隐藏的宝藏](#section-隐藏的宝藏)
-          - [antigravity模块是Python开发人员发布的少数复活节彩蛋之一](#antigravity模块是python开发人员发布的少数复活节彩蛋之一)
-          - [python没有goto,goto愚人节彩蛋](#python没有gotogoto愚人节彩蛋)
-          - [braces,使用大括号的复活节彩蛋](#braces使用大括号的复活节彩蛋)
-          - [！=和<>.愚人节彩蛋](#和愚人节彩蛋)
-          - [python之禅,复活节彩蛋](#python之禅复活节彩蛋)
-          - [循环,异常中的else子句](#循环异常中的else子句)
-          - [无穷大infinity的哈希值是 10⁵ x π](#无穷大infinity的哈希值是-10⁵-x-π)
-          - [类内双下划线名称修饰](#类内双下划线名称修饰)
-        - [section-杂项](#section-杂项)
-          - [+=更快](#更快)
-          - [字符串拼接 +/format/%/join](#字符串拼接-formatjoin)
-          - [inf和nan,无穷大和非数字](#inf和nan无穷大和非数字)
-          - [小知识点](#小知识点)
+  - [19-3-21](#19-3-21-2)
+    - [section-大脑运动](#section-大脑运动)
+      - [微妙的字符串驻留](#微妙的字符串驻留)
+      - [python字典键覆盖](#python字典键覆盖)
+      - [try语句块的return](#try语句块的return)
+      - [Python会将相同的内存地址分配给第二个对象](#python会将相同的内存地址分配给第二个对象)
+      - [for语句每次都会重新赋值](#for语句每次都会重新赋值)
+      - [执行时机差异](#执行时机差异)
+      - [is和==,-5~256已经分配](#is和-5256已经分配)
+      - [引用相同对象](#引用相同对象)
+      - [闭包函数与循环变量绑定](#闭包函数与循环变量绑定)
+      - [is not是一个二元运算符](#is-not是一个二元运算符)
+      - [以外的逗号](#以外的逗号)
+      - [字符串末尾的反斜杠](#字符串末尾的反斜杠)
+      - [运算符的优先级会影响表达式的求值顺序](#运算符的优先级会影响表达式的求值顺序)
+      - [三引号](#三引号)
+      - [不存在的午夜?](#不存在的午夜)
+      - [布尔是int的子类](#布尔是int的子类)
+      - [类属性和实例属性](#类属性和实例属性)
+      - [生成器与list](#生成器与list)
+      - [tuple也可以改变](#tuple也可以改变)
+      - [try语句块在except子句的末尾清除该异常](#try语句块在except子句的末尾清除该异常)
+      - [真与假(python2)](#真与假python2)
+      - [原地修改没有返回值](#原地修改没有返回值)
+      - [子类](#子类)
+      - [python字典键转换](#python字典键转换)
+      - [赋值语句表达式列表,循环赋值](#赋值语句表达式列表循环赋值)
+  - [19-3-28](#19-3-28-3)
+    - [section-外表是靠不住的](#section-外表是靠不住的)
+      - [即使外表和英文字母一样,但并不一样](#即使外表和英文字母一样但并不一样)
+      - [内存空间被释放后重新分配相同地址](#内存空间被释放后重新分配相同地址)
+      - [不要混用制表符和空格](#不要混用制表符和空格)
+  - [19-4-7](#19-4-7-1)
+    - [section-小心地雷](#section-小心地雷)
+      - [不支持迭代字典时修改它,字典自动扩容](#不支持迭代字典时修改它字典自动扩容)
+      - [del引用计数减1](#del引用计数减1)
+      - [迭代列表时删除元素](#迭代列表时删除元素)
+      - [for循环,循环变量泄露](#for循环循环变量泄露)
+      - [默认的可变参数只绑定一次](#默认的可变参数只绑定一次)
+      - [捕获异常](#捕获异常)
+      - [+=与+不同](#与不同)
+      - [修改外部作用域变量,global](#修改外部作用域变量global)
+      - [链式操作](#链式操作)
+      - [类定义中嵌套的作用域忽略类作用域的名称解析](#类定义中嵌套的作用域忽略类作用域的名称解析)
+      - [元组的逗号](#元组的逗号)
+    - [section-隐藏的宝藏](#section-隐藏的宝藏)
+      - [antigravity模块是Python开发人员发布的少数复活节彩蛋之一](#antigravity模块是python开发人员发布的少数复活节彩蛋之一)
+      - [python没有goto(goto是愚人节彩蛋)](#python没有gotogoto是愚人节彩蛋)
+      - [braces,使用大括号的复活节彩蛋](#braces使用大括号的复活节彩蛋)
+      - [！=和<>.愚人节彩蛋](#和愚人节彩蛋)
+      - [python之禅,复活节彩蛋](#python之禅复活节彩蛋)
+      - [循环,异常中的else子句](#循环异常中的else子句)
+      - [无穷大infinity的哈希值是"10⁵ x π"](#无穷大infinity的哈希值是10⁵-x-π)
+      - [类内双下划线名称修饰](#类内双下划线名称修饰)
+    - [section-杂项](#section-杂项)
+      - [+=更快](#更快)
+      - [字符串拼接 ( + |format |% |join )](#字符串拼接---format--join-)
+      - [inf和nan,无穷大和非数字](#inf和nan无穷大和非数字)
+      - [小知识点](#小知识点)
 - [8-电影](#8-电影)
   - [19-3-23](#19-3-23-2)
     - [大黄蜂](#大黄蜂)
@@ -602,23 +619,23 @@
 
 ## 19-3-25
 
-### 重装
+### ~~重装~~
 
 * 重装UbuntuServer(18.04).
 
-### 软件升级
+### ~~软件升级~~
 
 * `sudo apt upgrade`.
 
-### 安装pip3
+### ~~安装pip3~~
 
 * `sudo apt install python3-pip`.
 
-### 安装venv
+### ~~安装venv~~
 
 * `sudo apt install python3-venv`.
 
-### 新建虚拟环境`flask_p3`
+### ~~新建虚拟环境`flask_p3`~~
 
 1. `sudo python3 -m venv .`位于目录`~/env/flask_p3`.
 2. 切换到超级用户`sudo su`,否则装包时权限不足.
@@ -627,7 +644,7 @@
 5. 安装包`pip install xmltodict`.
 6. 退出环境`deactivate`.
 
-### 修改`.bashrc`简化命令
+### ~~修改`.bashrc`简化命令~~
 
 ```bash
 # 激活虚拟环境flask_p3
@@ -935,7 +952,7 @@ alias update="sudo apt update"
 
 ### 切换用户
 
-1. 切换到root`sudo su`或`su root`,`sudo`后跟一个` - `可以切换到对应的用户目录.
+1. 切换到root`sudo su`或`su root`,`su`后跟一个` - `可以切换到对应的用户目录.
 2. 切换到其他用户`su username`.
 3. 更改root密码`sudo passwd root`.
 
@@ -953,7 +970,7 @@ alias update="sudo apt update"
 
 ## 19-3-30
 
-### 软件更新
+### ~~软件更新~~
 
 1. `sudo apt upgrade`.
 2. 列出已经安装的包`sudo apt list --installed`.
@@ -967,7 +984,7 @@ alias update="sudo apt update"
 4. 删除内核`sudo apt-get remove linux-image-4.15.0-29-generic`.
 5. 删除`deinstall`的内核`sudo dpkg -P linux-image-4.15.0-29-generic`.
 
-### 配置vim
+### ~~配置vim~~
 
 1. 配置vim`/etc/vim/vimrc`
 
@@ -988,12 +1005,12 @@ alias update="sudo apt update"
     set tabstop=4
     ```
 
-### 终端配色
+### ~~终端配色~~
 
 1. 在`~/.bashrc`中设置`force_color_prompt=yes`,打开彩色终端.
 2. 配置`PS1='${debian_chroot:+($debian_chroot)}\[\033[03;34;01m\]<\u>\[\033[00;32;01m\]@\[\033[01;31;01m\]<\h>\[\033[00;37;01m\]: \[\033[01;35;01m\][\w] \n\[\033[01;33;01m\]("^_^) \[\033[0m\]'`.
 
-### mysql客户端
+### ~~mysql客户端~~
 
 1. 安装mysql客户端`sudo apt install mysql-client`.
 2. 使用`mysql -h db4free.net -P 3306 -umy__sql -p`访问免费数据库.
@@ -1008,13 +1025,13 @@ alias update="sudo apt update"
 
 ## 19-4-13
 
-### 软件升级
+### ~~软件升级~~
 
 `upgrade`
 
 ## 19-4-24
 
-### 软件升级
+### ~~软件升级~~
 
 `upgrade`
 
@@ -1029,7 +1046,7 @@ alias update="sudo apt update"
 7. `systemctl reload *.service` # 重新加载服务配置文件
 8. `systemctl status *.service` # 查询服务运行状态
 
-### 安装配置docker
+### ~~安装配置docker~~
 
 1. 官方命令直装`wget -qO- https://get.docker.com/ | sh`;
 2. 将当前用户加入特定用户组`sudo usermod -aG docker ubuntu`;
@@ -1050,15 +1067,15 @@ alias update="sudo apt update"
 
 ## 19-4-26
 
-### 软件升级
+### ~~软件升级~~
 
 `upgrade`
 
-### 配置Git
+### ~~配置Git~~
 
 1. 默认已安装`Git`;
-2. 用户名`git config --global user.name="***"`;
-3. 邮箱`git config --global user.email="***@*.com"`;
+2. 用户名`git config --global user.name "***"`;
+3. 邮箱`git config --global user.email "***@*.com"`;
 4. 生成公钥,免密登录,`ssh-keygen -t rsa -C "***@*.com"`;
 5. 生成目录`mkdir ECS_tx`;
 6. 转移目录`cd ECS_tx/`;
@@ -1068,6 +1085,224 @@ alias update="sudo apt update"
 10. 提交`git commit -m "init"`;
 11. 添加远程`git remote add origin git@github.com:***/ECS_tx.git`;
 12. 推送`git push -u orgin master`.
+
+## 19-4-27
+
+### 宕机,重装
+
+* 重装Ubuntu 18.04.2 LTS.
+
+### 软件升级
+
+1. `sudo apt update`;
+2. `sudo apt upgrade`;
+3. `sudo apt clean`;
+4. `sudo apt autoclean`;
+5. `sudo apt autoclean`;
+6. `sudo apt autoremove`.
+
+### 安装pip3
+
+* `sudo apt install python3-pip`.
+
+### 安装venv
+
+* `sudo apt install python3-venv`.
+
+### 新建虚拟环境`py3`
+
+1. `cd ~/envs/py3`;
+2. `python3 -m venv .`;
+3. 激活虚拟环境`source ~/env/py3/bin/activate`;
+4. 退出环境`deactivate`.
+
+### 借助`.bash_aliases`简化命令
+
+1. `cd ~`;
+2. `touch .bash_aliases`;
+3. 写入`.bash_aliases`
+
+    ```bash
+    # 激活虚拟环境flask_p3
+    alias py3="source ~/envs/py3/bin/activate"
+    # 清理窗口
+    alias cl="clear"
+    # 软件升级
+    alias upgrade="sudo apt upgrade"
+    # 更新软件源
+    alias update="sudo apt update"
+    ```
+
+4. `source .bashrc`.
+
+### 配置vim
+
+1. `sudo vim /etc/vim/vimrc`
+
+    ```bash
+    " The following are commented out as they cause vim to behave a lot
+    " differently from regular Vi. They are highly recommended though.
+    set showcmd             " Show (partial) command in status line.
+    set showmatch           " Show matching brackets.
+    set ignorecase          " Do case insensitive matching
+    set smartcase           " Do smart case matching
+    "set incsearch          " Incremental search
+    "set autowrite          " Automatically save before commands like :next and :make
+    "set hidden             " Hide buffers when they are abandoned
+    set mouse=a             " Enable mouse usage (all modes)
+
+    set number
+    set wrap
+    set ruler
+    set tabstop=4
+    ```
+
+### 终端配色
+
+1. 在`~/.bashrc`中设置`force_color_prompt=yes`,打开彩色终端.
+2. 配置`PS1='${debian_chroot:+($debian_chroot)}\[\033[03;34;01m\]<\u>\[\033[00;32;01m\]@\[\033[01;31;01m\]<\h>\[\033[00;37;01m\]: \[\033[01;35;01m\][\w] \n\[\033[01;33;01m\](^_^) \[\033[0m\]'`.
+
+### 安装mysql客户端
+
+1. 安装mysql客户端`sudo apt install mysql-client`.
+2. 使用`mysql -h db4free.net -P 3306 -umy__sql -p`访问免费数据库.
+3. 在`~/.bashrc`中添加简化命令`alias dbmysql="mysql -h db4free.net -P 3306 -umy__sql -p"`.
+
+### 安装配置docker
+
+1. 官方命令直装`wget -qO- https://get.docker.com/ | sh`;
+2. 将当前用户加入特定用户组`sudo usermod -aG docker ubuntu`;
+3. 关闭开机启动`systemctl disable docker`;
+4. 配置加速,`sudo vim /etc/docker/daemon.json`写入`{"registry-mirrors": ["https://mirror.ccs.tencentyun.com"]}`;
+5. 然后重启`sudo systemctl daemon-reload`->`sudo systemctl restart docker`;
+6. 查找镜像`docker search hello-world`;
+7. 拉取镜像`docker pull hello-world`;
+8. 查看镜像`docker images`;
+9. 运行镜像`docker run hello-world`;
+10. 查看容器`docker container ls -al`;
+11. 删除容器`docker container rm [**]`;
+12. 删除镜像`docker rmi [***]`.
+
+### 配置Git
+
+1. 默认已安装`Git`;
+2. 用户名`git config --global user.name "***"`;
+3. 邮箱`git config --global user.email "***@*.com"`;
+4. 生成公钥,免密登录,`ssh-keygen -t rsa -C "***@*.com"`;
+5. 验证`ssh -T git@github.com`;
+6. 生成目录`mkdir ECS_ubuntu`;
+7. 转移目录`cd ECS_ubuntu/`;
+8. 文件`echo "# ECS_ubuntu" >> README.md`;
+9. 初始化`git init`;
+10. 暂存`git add README.md`;
+11. 提交`git commit -m "init"`;
+12. 添加远程`git remote add origin git@github.com:***/ECS_ubuntu.git`;
+13. 推送`git push -u orgin master`.
+
+### 自动备份脚本
+
+```bash
+#!/bin/bash
+
+old_road=$(pwd)
+now_time=$(date +"%Y-%m-%d/%H:%M")
+# echo ${old_road}
+# echo ${{now_time}
+
+
+if test -d ~/ECS_ubuntu/history/bash_history
+then
+    history > ~/ECS_ubuntu/history/bash_history/bash_history;
+    if [ $? -ne 0 ]
+    then
+        echo "1 bash_history faild";
+    fi
+else
+    echo "bash_history not exit"
+fi
+
+
+if test -e ~/.bashrc -a -d ~/ECS_ubuntu/history/bash_history
+then
+    cp ~/.bashrc ~/ECS_ubuntu/history/bash_history/bashrc;
+    if [ $? -ne 0 ]
+    then
+        echo "2 bashrc faild";
+    fi
+else
+    echo "bash_history or bashrc not exit"
+fi
+
+
+if test -e ~/.bash_aliases -a -d ~/ECS_ubuntu/history/bash_history
+then
+    cp ~/.bash_aliases ~/ECS_ubuntu/history/bash_history/bash_aliases;
+    if [ $? -ne 0 ]
+    then
+        echo "3 bash_aliases faild";
+    fi
+else
+    echo "bash_history or bash_aliases not exit"
+fi
+
+
+if test -e ~/.mysql_history -a -d ~/ECS_ubuntu/history/mysql_history
+then
+    cp ~/.mysql_history ~/ECS_ubuntu/history/mysql_history/mysql_history;
+    if [ $? -ne 0 ]
+    then
+        echo "4 mysql_history faild";
+    fi
+else
+    echo "bash_history or mysql_history not exit"
+fi
+
+
+if test -d ~/ECS_ubuntu/history/apt_history
+then
+    apt list --installed > ~/ECS_ubuntu/history/apt_history/apt_history;
+    if [ $? -ne 0 ]
+    then
+        echo "5 apt_history faild";
+    fi
+else
+    echo "apt_history not exit"
+fi
+
+
+if test -e ~/envs/py3/bin/activate -a -d ~/ECS_ubuntu/history/pip_history
+then
+    source ~/envs/py3/bin/activate &&
+    pip list --format=freeze > ~/ECS_ubuntu/history/pip_history/requirements &&
+    deactivate;
+    if [ $? -ne 0 ]
+    then
+        echo "6 pip_requirements faild";
+    fi
+else
+    echo "py3 or pip_history not exit"
+fi
+
+if [[ $1 = 'yes' ]]
+then
+    if test -e ~/ECS_ubuntu
+    then
+        cd ~/ECS_ubuntu &&
+        git add . &&
+        git commit -m "${now_time}" &&
+        git push;
+        if [ $? -ne 0 ]
+        then
+            echo "7 git_push faild";
+        fi
+    else
+        echo "ECS_ubuntu not exit"
+    fi
+fi
+
+
+cd ${old_road};
+```
 
 ---
 
@@ -1551,6 +1786,8 @@ alias update="sudo apt update"
 
 ## 19-3-29
 
+### 第二部分 C/Cpp程序设计[续]
+
 #### 第6章 预处理,const与sizeof
 
 ##### 6.1 宏定义
@@ -1665,6 +1902,8 @@ alias update="sudo apt update"
     * 解析:在C++中,给类的数据成员加上`mutable`后,即使是const成员函数也可以修改它.
 
 ## 19-4-2
+
+### 第二部分 C/Cpp程序设计[续]
 
 #### 第6章(续)
 
@@ -2053,6 +2292,8 @@ alias update="sudo apt update"
 
 ## 19-4-4
 
+### 第二部分 C/Cpp程序设计[续]
+
 #### 第7章 指针与引用
 
 ##### 7.1 指针基本问题
@@ -2193,7 +2434,7 @@ alias update="sudo apt update"
       2. 可以使用`char *sre = "hello world";`或者`static char str[] = "hello world";`;
       3. 局部数组是局部变量,对应内存中的栈;
       4. 指针变量是全局变量,对应内存中的全局区域;
-      5. 字符串常量保存在只读的数据段,而不是像全局变量那样保存在普通数据段（静态存储区）.
+      5. 字符串常量保存在只读的数据段,而不是像全局变量那样保存在普通数据段(静态存储区).
 
 4. 下面程序的运行结果?
 
@@ -3074,96 +3315,72 @@ alias update="sudo apt update"
 
 # 5-黑马python
 
-### ~~>>>15-flask教程{19-3-21}~~
+## ~~>>>15-flask教程{19-3-21}~~
 
-##### 路由模块
+### ??-??-??
 
-* Werkzeug
+#### 路由模块=Werkzeug
 
-##### 模板引擎
+#### 模板引擎=jinja2
 
-* jinja2
+#### 操作数据库=Flask-SQLalchemy
 
-##### 操作数据库
+#### 表单=Flask-WTF
 
-* Flask-SQLalchemy
+#### 扩展命令行=Flask-script
 
-##### 表单
+#### 认证用户状态=Flask-Login
 
-* Flask-WTF
+#### 开发REST API的工具=Flask-RESTful
 
-##### 扩展命令行
+#### 集成前端Twitter Bootstrap框架=Flask-Bootstrap
 
-* Flask-script
+#### 本地化日期和时间=Flask-Moment
 
-##### 认证用户状态
+#### 反向解析=url_for
 
-* Flask-Login
+#### JSON数据=jsonify
 
-##### 开发REST API的工具
+### 19-3-20
 
-* Flask-RESTful
+#### 数据库迁移=Flask-Migrate
 
-##### 集成前端Twitter Bootstrap框架
+#### 邮箱扩展=Flask-Mail
 
-* Flask-Bootstrap
-
-##### 本地化日期和时间
-
-* Flask-Moment
-
-##### 反向解析
-
-* url_for
-
-##### JSON数据
-
-* jsonify
-
-#### 19-3-20
-
-##### 数据库迁移
-
-* Flask-Migrate
-
-##### 邮箱扩展
-
-* Flask-Mail
-
-##### 模块划分,循环引用,蓝图
+#### 模块划分,循环引用,蓝图
 
 1. 为视图函数添加路由器
 2. 使用蓝图--Blueprint
 
-#### 19-3-21
+### 19-3-21
 
-##### 单元测试
+#### 单元测试
 
 * unittest
 * flask的测试模式
 * 数据库测试
 
-##### 部署
+#### 部署
 
 * Gunicorn 绿色独角兽
 
 ---
 
-### ~~>>>16-微信公众号{19-3-23}~~
+## ~~>>>16-微信公众号{19-3-23}~~
 
-#### 19-3-23
+### 19-3-23
 
-##### 微信公众号服务器配置
+#### 微信公众号服务器配置
 
 1. 可以申请公众号的测试号.
 2. 配置第三方服务器,返回特定数据用来验证配置.
 
-##### 收发消息,事件
+#### 收发消息,事件
 
 1. XML格式数据通信.
 2. 事件响应.
 
-##### 微信网页授权
+#### 微信网页授权
 
 1. 提供给用户一个URL,包含重定向内容.
 2. 用户点击,弹出授权页面.
@@ -3173,26 +3390,26 @@ alias update="sudo apt update"
 6. 第三方服务器得到验证之后获取用户信息.
 7. 第三方服务器返回网页.
 
-### ~~>>>17-flask项目-爱家租房{19-4-12}~~
+## ~~>>>17-flask项目-爱家租房{19-4-12}~~
 
 1. CloudStudio中`apt update`后安装`mysql-client`和`libmysqlclient-dev`和`redis-server`.
 2. pip安装`requirements.txt`和`redis`.
 3. 免费数据库`mysql -h db4free.net -P 3306 -umy__sql -p`.
 4. 启动redis`sudo /etc/init.d/redis-server start`.
 5. 关闭redis.
-   1. `CTRL+C`.
+   1. <kbd>Ctrl</kbd>+<kbd>C</kbd>.
    2. `kill pid`.
    3. `redis-cli shutdown`.
    4. `/etc/init.d/redis-server stop`.
 
-#### 19-3-29
+### 19-3-29
 
-##### 前后端分离
+#### 前后端分离
 
-1. 前后端不分离,后端提供被数据渲染之后的模板,即完整网页.
+1. 前后端不分离,后端提供被数据渲染之后的模板,即完整网页;
 2. 前后端分离,后端不再控制前端的效果展示,仅仅提供数据,可以实现接口复用,但不利于SEO.
 
-##### 项目文件目录结构
+#### 项目文件目录结构
 
 1. 在单一文件(manage.py)中构建所有依赖工具.
    1. 配置信息.
@@ -3210,22 +3427,22 @@ alias update="sudo apt update"
       5. 在`ihome`下创建`models.py`.
    3. 最终,在`manage.py`中仅仅创建app并提供脚本.
 
-##### 日志功能
+#### 日志功能
 
 * 使用python自带的logging模块以及current_app中的logger全局对象.
 
-#### 19-3-30
+### 19-3-30
 
-##### 数据表设计
+#### 数据表设计
 
 1. 以存储空间换查询时间.
 2. 多对多通过中间表实现.
 
-##### 日志系统bug
+#### 日志系统bug
 
 * debug模式下设置日志级别不起作用.
 
-##### 数据库迁移
+#### 数据库迁移
 
 1. `python manage.py db init`.
 2. `python manage.py db migrate -m '说明'`别忘了import models证明一下models的存在.
@@ -3234,229 +3451,229 @@ alias update="sudo apt update"
 
 #### 19-3-31
 
-##### 静态文件接口
+#### 静态文件接口
 
 1. 提供静态文件接口的蓝图.
 2. 自定义正则转换器.
 3. flask提供了返回静态文件的方法`current_app.send_static_file()`.
 
-##### csrf防护
+#### csrf防护
 
 1. 浏览器--同源策略.
 2. 对比cookie和body中的`csrf_token`.
 3. 使用`flask-wtf`中的`csrf`生成`csrf_token`,在静态路由中添加之.
 
-##### 图片验证码
+#### 图片验证码
 
 1. 使用`captcha`工具.
-2. 保存在redis中.
+2. 保存在`redis`中.
 3. `RESTful`风格接口.
 
-##### 开发流程与接口文档
+#### 开发流程与接口文档
 
-##### 短信验证
+#### 短信验证
 
 1. 借助`云通讯`的sdk-python.
 2. 使用单例模式封装接口.
 3. 发送验证码前后端编写.
 
-#### 19-4-3
+### 19-4-3
 
-##### 注册
+#### 注册
 
 1. 规定接口;
 2. 规定传递的参数.
 
-###### 参数校验
+##### 参数校验
 
-###### 密码加密
+##### 密码加密
 
 * `from werkzeug.security import generate_password_hash`.
 
-###### property装饰器
+##### property装饰器
 
-###### 前端拦截表单提交
+##### 前端拦截表单提交
 
 1. `e.preventDefault()`拦截表单的自动提交行为;
 2. 使用ajax处理.
 
-###### 前端请求头传递csrf_token
+##### 前端请求头传递csrf_token
 
-##### 登录
+#### 登录
 
 1. 接口;
 2. 传递的参数.
 
-###### 限制访问次数
+##### 限制访问次数
 
-1. 使用IP地址（request.remote_addr）.存入redis.
+1. 使用IP地址(request.remote_addr).存入redis.
 2. redis自动递增函数.
 
-###### 后端检查登录状态接口
+##### 后端检查登录状态接口
 
-###### 后端登出接口
+##### 后端登出接口
 
-###### 登录验证装饰器
+##### 登录验证装饰器
 
 1. g对象保留本次访问的信息;
 2. `functools.wraps`保留被装饰函数的信息.
 
-#### 19-4-4
+### 19-4-4
 
-##### 图片服务
+#### 图片服务
 
 1. 扩容
 2. 备份
 3. 多机存储
 
-###### 搭建文件存储系统
+##### 搭建文件存储系统
 
 1. FastDFS-快速分布式文件存储系统,电商.
 2. HDFS-Hadoop分布式文件系统,多种文件.
 
-###### 第三方服务
+##### 第三方服务
 
 1. 七牛云,使用对应的SDK;
 2. 对象存储.
 
-###### 前端异步提交
+##### 前端异步提交
 
 1. 使用`jquery.form.min.js`中的`ajaxSubmit`对表单进行异步提交.
 
-##### 城区信息--缓存
+#### 城区信息--缓存
 
 1. 访问频率高,变化频率低;
 2. 缓存和数据库一起存.
 
-###### 缓存的同步问题
+##### 缓存的同步问题
 
 1. 操作mysql时删除缓存数据;
 2. 设置有效期.
 
-##### 前端模板
+#### 前端模板
 
 1. `art-template`.
 
-#### 19-4-6
+### 19-4-6
 
-##### 发布房源
+#### 发布房源
 
-###### 保存房屋基本信息后端
+##### 保存房屋基本信息后端
 
-###### 保存房屋图片信息后端
+##### 保存房屋图片信息后端
 
-###### 保存房屋信息前端
+##### 保存房屋信息前端
 
 * JS中的map函数.
 
-#### 19-4-7
+### 19-4-7
 
-##### celery
+#### celery
 
-###### celery模型
+##### celery模型
 
-1. worker（任务处理者）--- 完整的任务代码.
-2. broker（任务队列）：rabbitMQ,redis
-3. client（客户端）--- 定义任务（使用装饰器app.task）>> 发布任务（.delay）
-4. backend（保存结果数据）
+1. worker(任务处理者)--- 完整的任务代码.
+2. broker(任务队列)：rabbitMQ,redis
+3. client(客户端)--- 定义任务(使用装饰器app.task)>> 发布任务(.delay)
+4. backend(保存结果数据)
 
-###### celery使用
+##### celery使用
 
 1. 定义celery对象;
 2. 定义任务,使用`@celery_app.task`;
 3. 发布任务,`.delay(参数)`
 4. 启动celery,保证与客户端在同一目录下启动`celery -A 定义任务的python模块 -l info`.
 
-###### celery目录结构
+##### celery目录结构
 
 1. 启动文件`main.py`;
 2. 配置文件`config.py`;
-3. 任务文件（包）,可以自动搜寻异步任务.
+3. 任务文件(包),可以自动搜寻异步任务.
 
-###### celery独立的目录使用
+##### celery独立的目录使用
 
 * celery可以使用独立的目录,只要保证和客户端目录一致即可.
 
-###### celery接收返回值
+##### celery接收返回值
 
 1. 客户端处返回异步任务对象;
 2. 通过返回的对象的`get()方法`可以接收返回值,但是默认是阻塞态.
 
-#### 19-4-9
+### 19-4-9
 
-##### 房屋管理
+#### 房屋管理
 
-###### 展示我的房源
+##### 展示我的房源
 
-###### 显示主页数据
+##### 显示主页数据
 
 1. 存入缓存备用;
 2. 前端轮播插件`swiper`.
 
-###### 房屋详情数据
+##### 房屋详情数据
 
 1. 判断是否为房东浏览;
 2. 大量数据转换,将方法封装到模型类中;
 3. 前端获取请求路径中的搜索参数.
 
-#### 19-4-11
+### 19-4-11
 
-##### 房屋列表
+#### 房屋列表
 
-> 按照选定的规则进行房屋信息查询.
+* 按照选定的规则进行房屋信息查询.
 
-###### 过滤规则
+##### 过滤规则
 
 1. 将数据库比较语句存入过滤器列表中;
 2. 魔法方法`__eq__`重写`==`逻辑.
 
-###### 缓存处理
+##### 缓存处理
 
 1. 将当前查询条件的结果存入redis中;
 2. redis中的`pipline`,是一种管道,一次可以执行多条语句.
 
-##### 订单
+#### 订单
 
-###### 时间处理
+##### 时间处理
 
 * datetime时间相减得到时间间隔,用来得到间隔天数.
 
-###### 保存订单
+##### 保存订单
 
-###### 查询订单
+##### 查询订单
 
-###### 接单/拒单
+##### 接单/拒单
 
-###### 评论
+##### 评论
 
-##### 订单支付
+#### 订单支付
 
-###### 支付宝接入流程
+##### 支付宝接入流程
 
-###### 手机网站支付流程
+##### 手机网站支付流程
 
-#### 19-4-12
+### 19-4-12
 
-##### 订单支付(续)
+#### 订单支付(续)
 
-###### 支付宝密钥与SDK使用
+##### 支付宝密钥与SDK使用
 
 1. 使用rsa非对称加密算法;
    1. openssl生成私钥和公钥.
 2. 支付宝官方没有提供python版本的SDK,使用第三方`phthon-alipay-sdk`.
 
-###### 支付宝支付后端接口
+##### 支付宝支付后端接口
 
-###### 获取支付结果修改订单
+##### 获取支付结果修改订单
 
-##### 项目优化
+#### 项目优化
 
-###### csrf_token丢失bug的解决
+##### csrf_token丢失bug的解决
 
-1. WTF从session
+1. WTF默认从session读取;
 2. 解决方法:清空session时,单独保留`csrf_token`.
 
-###### 数据库优化
+##### 数据库优化
 
 1. 表结构设计优化;
     1. 关系型数据库的三范式
@@ -3490,41 +3707,41 @@ alias update="sudo apt update"
 3. vpn---虚拟私有网络---阿里云-腾讯云-AWS
 4. 数据库
 
-### >>>18-通用爬虫模块
+## >>>18-通用爬虫模块
 
-#### 19-4-14
+### 19-4-14
 
-##### 爬虫基本概念
+#### 爬虫基本概念
 
-###### 课程介绍和概念
+##### 课程介绍和概念
 
 1. 动态网页与静态网页;
 2. 微指数-微博;
 3. 爬虫模拟浏览器行为.
 
-###### 爬虫的分类
+##### 爬虫的分类
 
 1. 通用爬虫
 2. 聚焦爬虫
 
-###### markdown介绍
+##### markdown介绍
 
-###### robots协议
+##### robots协议
 
 * 道德层面的协议.
 
-###### HTTP和HTTPS协议
+##### HTTP和HTTPS协议
 
 1. HTTP---超文本传输协议,默认端口80;
 2. HTTPS---加入SSL(安全套接层),默认端口443;
 3. HTTPS更安全,但是性能低.
 
-###### 浏览器发送HTTP请求的过程
+##### 浏览器发送HTTP请求的过程
 
 1. DNS服务器;
 2. 浏览器渲染的页面和爬虫请求的页面不一样.
 
-#### 19-4-19
+### 19-4-19
 
 ##### 爬虫基本概念[续]
 
@@ -3533,10 +3750,10 @@ alias update="sudo apt update"
 1. URL基本格式:`scheme://host[:port#]/path/…/[?query-string][#anchor]`
     1. scheme：协议(例如：http, https, ftp)
     2. host：服务器的IP地址或者域名
-    3. port#：服务器的端口（如果是走协议默认端口,缺省端口80）
+    3. port#：服务器的端口(如果是走协议默认端口,缺省端口80)
     4. path：访问资源的路径
     5. query-string：参数,发送给http服务器的数据
-    6. anchor：锚（跳转到网页的指定锚点位置）
+    6. anchor：锚(跳转到网页的指定锚点位置)
 2. HTTP请求格式:
     1. 请求行,`请求方法+空格+URL+空格+协议版本+回车换行`;
     2. 请求头部,`头部字段名:值+回车换行*n`;
@@ -3559,17 +3776,17 @@ alias update="sudo apt update"
 
 * `r = requests.get(url,headers=headers)`.
 
-#### 19-4-20
+### 19-4-20
 
-##### requests库[续]
+#### requests库[续]
 
-###### 贴吧爬虫
+##### 贴吧爬虫
 
-###### 发送POST请求
+##### 发送POST请求
 
 * `r = requests.post("http://www.baidu.com/", data = data)`
 
-###### 使用代理
+##### 使用代理
 
 1. 代理分类
     1. 反向代理nginx,浏览器不知道最终服务器的地址.
@@ -3578,7 +3795,7 @@ alias update="sudo apt update"
     1. 隐藏真实地址;
     2. 避免服务器识别同一客户.
 
-###### 模拟登录的三种方式
+##### 模拟登录的三种方式
 
 1. cookie和session的区别
     1. cookie浏览器,session服务器.
@@ -3588,7 +3805,7 @@ alias update="sudo apt update"
     2. headers中添加cookie键,值为cookie字符串
     3. 在请求方法中添加cookies参数,接收字典形式的cookie.字典形式的cookie中的键是cookie的name对应的值,值是cookie的value对应的值
 
-##### chrome分析psot和json
+#### chrome分析psot和json
 
 ###### 寻找post的地址
 
@@ -3616,44 +3833,44 @@ alias update="sudo apt update"
 4. 超时参数`timeout=10`
 5. python模块`retrying`,重复多次
 
-#### 19-4-21
+### 19-4-21
 
-##### json数据处理
+#### json数据处理
 
-###### 数据的分类
+##### 数据的分类
 
 1. 非结构化数据
     1. 正则
     2. xpath
 2. 结构化数据
 
-###### json模块
+##### json模块
 
 1. json->python,`json.loads()`
 2. python->json,`json.dumps()`
 3. 使用`json.load`提取类文件对象中的数据
 4. `json.dump`能够把python类型放入类文件对象中
 
-###### 豆瓣爬虫练习
+##### 豆瓣爬虫练习
 
-#### 19-4-22
+### 19-4-22
 
-##### 正则处理
+#### 正则处理
 
-###### 正则和原始字符串
+##### 正则和原始字符串
 
 1. 点号不能匹配`\n`;
 2. `re.compile()`.
 
-###### 内涵段子爬虫
+##### 内涵段子爬虫
 
-#### 19-4-23
+### 19-4-23
 
-##### XPATN处理数据
+#### XPATN处理数据
 
-###### 了解XML
+##### 了解XML
 
-###### XPATH
+##### XPATH
 
 1. 使用xpath helper或者是chrome中的copy xpath都是从element中提取的数据,但是爬虫获取的是url对应的响应,往往和elements不一样
 2. 获取文本
@@ -3667,29 +3884,29 @@ alias update="sudo apt update"
     1. 在xpath最前面表示从当前html中任意位置开始选择
     2. `li//a` 表示的是li下任何一个标签
 
-###### lxml库
+##### lxml库
 
-1. lxml能够修正HTML代码,但是可能会改错了
+1. lxml能够修正HTML代码,但是可能会改错
     1. 使用etree.tostring观察修改之后的html的样子,根据修改之后的html字符串写xpath
 2. lxml 能够接受bytes和str的字符串
 3. 提取页面数据的思路
     1. 先分组,渠道一个包含分组标签的列表
     2. 遍历,取其中每一组进行数据的提取,不会造成数据的对应错乱
 
-##### 通用爬虫案例
+#### 通用爬虫案例
 
-###### xpath的包含
+##### xpath的包含
 
 1. `//div[contains(@class,'i')]`
 
-###### 实现爬虫的套路
+##### 实现爬虫的套路
 
 1. 准备url
     1. 准备start_url
         1. url地址规律不明显,总数不确定
         2. 通过代码提取下一页的url
             1. xpath
-            2. 寻找url地址,部分参数在当前的响应中（比如,当前页码数和总的页码数在当前的响应中）
+            2. 寻找url地址,部分参数在当前的响应中(比如,当前页码数和总的页码数在当前的响应中)
     2. 准备url_list
         1. 页码总数明确
         2. url地址规律明显
@@ -3729,35 +3946,35 @@ alias update="sudo apt update"
     1. 保存在本地,text,json,csv
     2. 保存在数据库
 
-###### 百度爬虫
+##### 百度爬虫
 
-###### 糗事百科爬虫
+##### 糗事百科爬虫
 
-###### 多线程爬虫
+##### 多线程爬虫
 
-#### 19-4-24
+### 19-4-24
 
-##### 爬取动态html数据
+#### 爬取动态html数据
 
-###### 动态HTML技术
+##### 动态HTML技术
 
 1. `JS`;
 2. `JQuery`;
 3. `Ajax`.
 
-###### Selenium
+##### Selenium
 
-1. 是一个Web的自动化测试工具,最初是为网站自动化测试而开发的,类型像我们玩游戏用的按键精灵,可以按指定的命令自动操作,不同是Selenium 可以直接运行在浏览器上,它支持所有主流的浏览器（包括PhantomJS这些无界面的浏览器）.
+1. 是一个Web的自动化测试工具,最初是为网站自动化测试而开发的,类型像我们玩游戏用的按键精灵,可以按指定的命令自动操作,不同是Selenium 可以直接运行在浏览器上,它支持所有主流的浏览器(包括PhantomJS这些无界面的浏览器).
 2. Selenium 可以根据我们的指令,让浏览器自动加载页面,获取需要的数据,甚至页面截屏,或者判断网站上某些动作是否发生.
 3. Selenium 自己不带浏览器,不支持浏览器的功能,它需要与第三方浏览器结合在一起才能使用.但是我们有时候需要让它内嵌在代码中运行,所以我们可以用一个叫 PhantomJS 的工具代替真实的浏览器.
 
-###### PhantomJS
+##### PhantomJS
 
 * PhantomJS 是一个基于Webkit的“无界面”(headless)浏览器,它会把网站加载到内存并执行页面上的 JavaScript,因为不会展示图形界面,所以运行起来比完整的浏览器要高效.
 
-###### 豆瓣登陆案例
+##### 豆瓣登陆案例
 
-###### 验证码的识别
+##### 验证码的识别
 
 1. url不变,验证码不变
     1. 请求验证码的地址,获得相应,识别
@@ -3774,7 +3991,7 @@ alias update="sudo apt update"
         2. 获取登录页面中driver中的cookie,交给requests模块发送验证码的请求,识别
         3. 输入验证码,点击登录
 
-###### selenium使用的注意点
+##### selenium使用的注意点
 
 1. 获取文本和获取属性
     2. 先定位到元素,然后调用`.text`或者`get_attribute`方法来去
@@ -3787,17 +4004,17 @@ alias update="sudo apt update"
 5. selenium请求第一页的时候回等待页面加载完了之后在获取数据,但是在点击翻页之后,hi直接获取数据,此时可能会报错,因为数据还没有加载出来,需要time.sleep(3)
 6. selenium中find_element_by_class_name智能接收一个class对应的一个值,不能传入多个
 
-###### 使用Tesseract
+##### 使用Tesseract
 
 1. 图像翻译为文字的`OCR`库;
 2. `sudo apt install tesseract-ocr`;
 3. `pip install pytesseract`. 
 
-#### 19-4-25
+### 19-4-25
 
-##### 斗鱼爬虫
+#### 斗鱼爬虫
 
-##### mongodb介绍及安装
+#### mongodb介绍及安装
 
 1. `NO-SQL`,非关系型数据库,`Not Only SQL`.
 2. 安装`sudo apt install -y mongodb`;
@@ -3807,28 +4024,28 @@ alias update="sudo apt update"
 6. 重启`sudo service mongodb restart`;
 7. 查看启动成功`pgrep mongo -l`;
 8. 配置文件`/etc/mongod.conf`;
-9. 端口`27017`;
+9. 默认端口`27017`;
 10. 日志`/var/log/mongodb/mongod.log`;
 11. 启动终端`mongo`.
 
-#### 19-4-26
+### 19-4-26
 
-##### mongodb增删改查
+#### mongodb增删改查
 
-###### 基础命令
+##### 基础命令
 
 1. 当前数据库`db`;
 2. 查看所有数据库`show dbs/show databases`;
 3. 切换数据库`use db_name`;
 4. 删除当前数据库`db.dropDatabase()`.
 
-###### 集合
+##### 集合
 
 1. 创建集合`db.createCollection(name,options)`;
 2. 查看集合`show collections`;
-3. 删除集合`db.集合名称.drop()`;
+3. 删除集合`db.集合名称.drop()`.
 
-###### 数据类型
+##### 数据类型
 
 1. `Object ID`:文档ID;
    1. 保证文档唯一性的ID,有特殊含义.
@@ -3840,19 +4057,19 @@ alias update="sudo apt update"
 7. `Object`:用于嵌入式的文档;
 8. `Null`:存储Null值;
 9.  `Timestamp`:时间戳,从1970-01-01开始的秒数;
-10. `Date`:日期时间;
-    1. `new Date("2018-02-02")`;
+10. `Date`:日期时间.
+    1. `new Date("2018-02-02")`.
 
-###### mongodb插入数据
+##### mongodb插入数据
 
 1. db.collecion.insert({}) 插入数据,`_id`存在就报错;
 2. db.collection.save({}) 插入数据,`_id`存在会更新.
 
-###### mongodb查询数据
+##### mongodb查询数据
 
 * `db.集合名称.find()`.
 
-###### mongodb更新数据
+##### mongodb更新数据
 
 1. `db.test1000.update({name:"xiaowang"},{name:"xiaozhao"})`;
 2. 把name为xiaowang的数据替换为`{name:"xiaozhao"}`;
@@ -3861,7 +4078,7 @@ alias update="sudo apt update"
 5. `db.test1000.update({name:"xiaozhang"},{$set:{name:"xiaohong"}},{multi:true})`;
 6. `{multi:true}`达到更新多条的目的,必须和`$`一起才起作用.
 
-###### mongodb删除
+##### mongodb删除数据
 
 1. `db.test1000.remove({name:"xiaohong"},{justOne:true})`;
 2. 默认情况会删除所有满足条件的数据,`{justOne:true}`能达到只删除一条的效果.
@@ -3904,130 +4121,130 @@ alias update="sudo apt update"
 
 # ~~7-WTFPython{19-4-7}~~
 
-#### 19-3-21
+## 19-3-21
 
-##### section-大脑运动
+### section-大脑运动
 
-###### 微妙的字符串驻留
+#### 微妙的字符串驻留
 
-###### python字典键覆盖
+#### python字典键覆盖
 
-###### try语句块的return
+#### try语句块的return
 
-###### Python会将相同的内存地址分配给第二个对象
+#### Python会将相同的内存地址分配给第二个对象
 
-###### for语句每次都会重新赋值
+#### for语句每次都会重新赋值
 
-###### 执行时机差异
+#### 执行时机差异
 
-###### is和==,-5~256已经分配
+#### is和==,-5~256已经分配
 
-###### 引用相同对象
+#### 引用相同对象
 
-###### 闭包函数与循环变量绑定
+#### 闭包函数与循环变量绑定
 
-###### is not是一个二元运算符
+#### is not是一个二元运算符
 
-###### 以外的逗号
+#### 以外的逗号
 
-###### 字符串末尾的反斜杠
+#### 字符串末尾的反斜杠
 
-###### 运算符的优先级会影响表达式的求值顺序
+#### 运算符的优先级会影响表达式的求值顺序
 
-###### 三引号
+#### 三引号
 
-###### 不存在的午夜?
+#### 不存在的午夜?
 
-###### 布尔是int的子类
+#### 布尔是int的子类
 
-###### 类属性和实例属性
+#### 类属性和实例属性
 
-###### 生成器与list
+#### 生成器与list
 
-###### tuple也可以改变
+#### tuple也可以改变
 
-###### try语句块在except子句的末尾清除该异常
+#### try语句块在except子句的末尾清除该异常
 
-###### 真与假(python2)
+#### 真与假(python2)
 
-###### 原地修改没有返回值
+#### 原地修改没有返回值
 
-###### 子类
+#### 子类
 
-###### python字典键转换
+#### python字典键转换
 
-###### 赋值语句表达式列表,循环赋值
+#### 赋值语句表达式列表,循环赋值
 
-#### 19-3-28
+## 19-3-28
 
-##### section-外表是靠不住的
+### section-外表是靠不住的
 
-###### 即使外表和英文字母一样,但并不一样
+#### 即使外表和英文字母一样,但并不一样
 
-###### 内存空间被释放后重新分配相同地址
+#### 内存空间被释放后重新分配相同地址
 
-###### 不要混用制表符和空格
+#### 不要混用制表符和空格
 
-#### 19-4-7
+## 19-4-7
 
-##### section-小心地雷
+### section-小心地雷
 
-###### 不支持迭代字典时修改它,字典自动扩容
+#### 不支持迭代字典时修改它,字典自动扩容
 
-###### del引用计数减1
+#### del引用计数减1
 
-###### 迭代列表时删除元素
+#### 迭代列表时删除元素
 
-###### for循环,循环变量泄露
+#### for循环,循环变量泄露
 
-###### 默认的可变参数只绑定一次
+#### 默认的可变参数只绑定一次
 
-###### 捕获异常
+#### 捕获异常
 
-###### +=与+不同
+#### +=与+不同
 
-###### 修改外部作用域变量,global
+#### 修改外部作用域变量,global
 
-###### 链式操作
+#### 链式操作
 
-###### 类定义中嵌套的作用域忽略类作用域的名称解析
+#### 类定义中嵌套的作用域忽略类作用域的名称解析
 
-###### 元组的逗号
+#### 元组的逗号
 
-##### section-隐藏的宝藏
+### section-隐藏的宝藏
 
-###### antigravity模块是Python开发人员发布的少数复活节彩蛋之一
+#### antigravity模块是Python开发人员发布的少数复活节彩蛋之一
 
-###### python没有goto,goto愚人节彩蛋
+#### python没有goto(goto是愚人节彩蛋)
 
-###### braces,使用大括号的复活节彩蛋
+#### braces,使用大括号的复活节彩蛋
 
-###### ！=和<>.愚人节彩蛋
+#### ！=和<>.愚人节彩蛋
 
-###### python之禅,复活节彩蛋
+#### python之禅,复活节彩蛋
 
-###### 循环,异常中的else子句
+#### 循环,异常中的else子句
 
-###### 无穷大infinity的哈希值是 10⁵ x π
+#### 无穷大infinity的哈希值是"10⁵ x π"
 
-###### 类内双下划线名称修饰
+#### 类内双下划线名称修饰
 
-##### section-杂项
+### section-杂项
 
-###### +=更快
+#### +=更快
 
-###### 字符串拼接 +/format/%/join
+#### 字符串拼接 ( + |format |% |join )
 
-###### inf和nan,无穷大和非数字
+#### inf和nan,无穷大和非数字
 
-###### 小知识点
+#### 小知识点
 
 1. join是一个字符串操作而不是一个列表操作;
 2. ++操作符实际是两个+;
 3. Python使用2个字节存储函数中的本地变量;
 4. 全局解释器锁;
 5. 列表切片越界不报错;
-6. str.count('').
+6. `str.count('')`.
 
 ---
 
