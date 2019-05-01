@@ -122,6 +122,14 @@
       - [第7章 指针与引用](#第7章-指针与引用)
         - [7.1 指针基本问题](#71-指针基本问题)
         - [7.2 传递动态内存](#72-传递动态内存)
+  - [19.4.30](#19430)
+    - [第二部分 C/Cpp程序设计[续]](#第二部分-ccpp程序设计续-3)
+      - [第7章 指针与引用[续]](#第7章-指针与引用续)
+        - [7.3 函数指针](#73-函数指针)
+        - [7.4 指针数组和数组指针](#74-指针数组和数组指针)
+        - [7.5 迷途指针](#75-迷途指针)
+        - [7.6 指针和句柄](#76-指针和句柄)
+        - [7.7 this指针](#77-this指针)
 - [4-python官方文档](#4-python官方文档)
   - [~~>>>1入门教程{19-4-1}~~](#1入门教程19-4-1)
     - [19-3-24](#19-3-24)
@@ -408,6 +416,34 @@
         - [mongodb查询数据](#mongodb查询数据)
         - [mongodb更新数据](#mongodb更新数据)
         - [mongodb删除数据](#mongodb删除数据)
+    - [19-5-1](#19-5-1)
+      - [mongodb高级查询](#mongodb高级查询)
+        - [find基本](#find基本)
+        - [比较运算符](#比较运算符)
+        - [范围运算符](#范围运算符)
+        - [逻辑运算符](#逻辑运算符)
+        - [正则表达式](#正则表达式)
+        - [limit和skip](#limit和skip)
+        - [自定义查询](#自定义查询)
+        - [投影](#投影)
+        - [排序](#排序)
+        - [统计个数](#统计个数)
+        - [消除重复](#消除重复)
+      - [mongodb备份与回复](#mongodb备份与回复)
+        - [mongodb备份](#mongodb备份)
+        - [mongodb恢复](#mongodb恢复)
+      - [mongodb聚合](#mongodb聚合)
+        - [常用管道](#常用管道)
+        - [表达式](#表达式)
+        - [$group](#group)
+        - [$match](#match)
+        - [$sort](#sort)
+        - [$limit和$skip](#limit和skip)
+        - [$unwind](#unwind)
+      - [mongodb索引](#mongodb索引)
+        - [指令执行时间](#指令执行时间)
+        - [建立索引](#建立索引)
+      - [爬虫数据去重,实现增量式爬虫](#爬虫数据去重实现增量式爬虫)
 - [6-牛客网](#6-牛客网)
   - [19-3-22](#19-3-22-1)
     - [C/C++*50](#cc50)
@@ -487,6 +523,8 @@
   - [19-4-5](#19-4-5)
     - [飞驰人生](#飞驰人生)
     - [神探蒲松龄](#神探蒲松龄)
+  - [19-5-1](#19-5-1-1)
+    - [狩猎](#狩猎)
 
 ---
 
@@ -1201,108 +1239,110 @@ alias update="sudo apt update"
 
 ### 自动备份脚本
 
-```bash
-#!/bin/bash
+* `~/ECS_ubuntu/logout_script.sh`
 
-old_road=$(pwd)
-now_time=$(date +"%Y-%m-%d/%H:%M")
-# echo ${old_road}
-# echo ${{now_time}
+    ```bash
+    #!/bin/bash
+
+    old_road=$(pwd)
+    now_time=$(date +"%Y-%m-%d/%H:%M")
+    # echo ${old_road}
+    # echo ${{now_time}
 
 
-if test -d ~/ECS_ubuntu/history/bash_history
-then
-    history > ~/ECS_ubuntu/history/bash_history/bash_history;
-    if [ $? -ne 0 ]
+    if test -d ~/ECS_ubuntu/history/bash_history
     then
-        echo "1 bash_history faild";
-    fi
-else
-    echo "bash_history not exit"
-fi
-
-
-if test -e ~/.bashrc -a -d ~/ECS_ubuntu/history/bash_history
-then
-    cp ~/.bashrc ~/ECS_ubuntu/history/bash_history/bashrc;
-    if [ $? -ne 0 ]
-    then
-        echo "2 bashrc faild";
-    fi
-else
-    echo "bash_history or bashrc not exit"
-fi
-
-
-if test -e ~/.bash_aliases -a -d ~/ECS_ubuntu/history/bash_history
-then
-    cp ~/.bash_aliases ~/ECS_ubuntu/history/bash_history/bash_aliases;
-    if [ $? -ne 0 ]
-    then
-        echo "3 bash_aliases faild";
-    fi
-else
-    echo "bash_history or bash_aliases not exit"
-fi
-
-
-if test -e ~/.mysql_history -a -d ~/ECS_ubuntu/history/mysql_history
-then
-    cp ~/.mysql_history ~/ECS_ubuntu/history/mysql_history/mysql_history;
-    if [ $? -ne 0 ]
-    then
-        echo "4 mysql_history faild";
-    fi
-else
-    echo "bash_history or mysql_history not exit"
-fi
-
-
-if test -d ~/ECS_ubuntu/history/apt_history
-then
-    apt list --installed > ~/ECS_ubuntu/history/apt_history/apt_history;
-    if [ $? -ne 0 ]
-    then
-        echo "5 apt_history faild";
-    fi
-else
-    echo "apt_history not exit"
-fi
-
-
-if test -e ~/envs/py3/bin/activate -a -d ~/ECS_ubuntu/history/pip_history
-then
-    source ~/envs/py3/bin/activate &&
-    pip list --format=freeze > ~/ECS_ubuntu/history/pip_history/requirements &&
-    deactivate;
-    if [ $? -ne 0 ]
-    then
-        echo "6 pip_requirements faild";
-    fi
-else
-    echo "py3 or pip_history not exit"
-fi
-
-if [[ $1 = 'yes' ]]
-then
-    if test -e ~/ECS_ubuntu
-    then
-        cd ~/ECS_ubuntu &&
-        git add . &&
-        git commit -m "${now_time}" &&
-        git push;
+        history > ~/ECS_ubuntu/history/bash_history/bash_history;
         if [ $? -ne 0 ]
         then
-            echo "7 git_push faild";
+            echo "1 bash_history faild";
         fi
     else
-        echo "ECS_ubuntu not exit"
+        echo "bash_history not exit"
     fi
-fi
 
 
-cd ${old_road};
-```
+    if test -e ~/.bashrc -a -d ~/ECS_ubuntu/history/bash_history
+    then
+        cp ~/.bashrc ~/ECS_ubuntu/history/bash_history/bashrc;
+        if [ $? -ne 0 ]
+        then
+            echo "2 bashrc faild";
+        fi
+    else
+        echo "bash_history or bashrc not exit"
+    fi
+
+
+    if test -e ~/.bash_aliases -a -d ~/ECS_ubuntu/history/bash_history
+    then
+        cp ~/.bash_aliases ~/ECS_ubuntu/history/bash_history/bash_aliases;
+        if [ $? -ne 0 ]
+        then
+            echo "3 bash_aliases faild";
+        fi
+    else
+        echo "bash_history or bash_aliases not exit"
+    fi
+
+
+    if test -e ~/.mysql_history -a -d ~/ECS_ubuntu/history/mysql_history
+    then
+        cp ~/.mysql_history ~/ECS_ubuntu/history/mysql_history/mysql_history;
+        if [ $? -ne 0 ]
+        then
+            echo "4 mysql_history faild";
+        fi
+    else
+        echo "bash_history or mysql_history not exit"
+    fi
+
+
+    if test -d ~/ECS_ubuntu/history/apt_history
+    then
+        apt list --installed > ~/ECS_ubuntu/history/apt_history/apt_history;
+        if [ $? -ne 0 ]
+        then
+            echo "5 apt_history faild";
+        fi
+    else
+        echo "apt_history not exit"
+    fi
+
+
+    if test -e ~/envs/py3/bin/activate -a -d ~/ECS_ubuntu/history/pip_history
+    then
+        source ~/envs/py3/bin/activate &&
+        pip list --format=freeze > ~/ECS_ubuntu/history/pip_history/requirements &&
+        deactivate;
+        if [ $? -ne 0 ]
+        then
+            echo "6 pip_requirements faild";
+        fi
+    else
+        echo "py3 or pip_history not exit"
+    fi
+
+    if [[ $1 = 'yes' ]]
+    then
+        if test -e ~/ECS_ubuntu
+        then
+            cd ~/ECS_ubuntu &&
+            git add . &&
+            git commit -m "${now_time}" &&
+            git push;
+            if [ $? -ne 0 ]
+            then
+                echo "7 git_push faild";
+            fi
+        else
+            echo "ECS_ubuntu not exit"
+        fi
+    fi
+
+
+    cd ${old_road};
+    ```
 
 ---
 
@@ -2574,6 +2614,78 @@ cd ${old_road};
     }
 
     * 解析：😥
+
+## 19.4.30
+
+### 第二部分 C/Cpp程序设计[续]
+
+#### 第7章 指针与引用[续]
+
+##### 7.3 函数指针
+
+1. `const char *const * keyword1`;`const char const * keyword2`;`const char *const keyword3`;`const char const keyword4`.以上四种有什么区别?
+
+    [挖坑待填](#)
+
+2. 找出下面程序的错误?
+
+    [挖坑待填](#)
+
+3. 下列数据分别代表什么?
+
+    [挖坑待填](#)
+
+##### 7.4 指针数组和数组指针
+
+1. 下面程序输出?
+
+   [挖坑待填](#)
+
+2. 一个指向整型数组的指针的定义为?
+
+   [挖坑待填](#)
+
+3. 给出下面的定义?
+
+   [挖坑待填](#)
+
+4. 下面程序段的输出?
+
+   [挖坑待填](#)
+
+##### 7.5 迷途指针
+
+1. 下面代码的错误?
+
+   [挖坑待填](#)
+
+2. 空指针和迷途指针的区别?
+
+   [挖坑待填](#)
+
+3. C++有了`malloc/free`,为什么还需要`new/delete`?
+
+   [挖坑待填](#)
+
+4. 下面程序的输出结果?
+
+   [挖坑待填](#)
+
+##### 7.6 指针和句柄
+
+1. 句柄和指针的区别和联系?
+
+   [挖坑待填](#)
+
+2. 关于`auto_ptr`使用正确的是?
+
+   [挖坑待填](#)
+
+##### 7.7 this指针
+
+1. 关于this指针,说法正确的是?
+
+   [挖坑待填](#)
 
 ---
 
@@ -4083,6 +4195,217 @@ cd ${old_road};
 1. `db.test1000.remove({name:"xiaohong"},{justOne:true})`;
 2. 默认情况会删除所有满足条件的数据,`{justOne:true}`能达到只删除一条的效果.
 
+### 19-5-1
+
+#### mongodb高级查询
+
+##### find基本
+
+1. `db.集合名称.find({条件文档})`;
+2. 查一个`db.集合名称.findOne({条件文档})`;
+3. 美化`db.集合名称.find({条件文档}).pretty()`.
+
+##### 比较运算符
+
+1. 等于,默认状态;
+2. 小于,`$lt`(little than);
+3. 小于等于,`$lte`(little than equal);
+4. 大于,`$gt`(greater than);
+5. 大于等于,`$gte`;
+6. 不等于,`$ne`.
+7. 举例`db.stu,find({age:{$gte:18}})`.
+
+##### 范围运算符
+
+1. `$in`;
+2. `$nin`;
+3. 举例`db.stu.find({age:{$in:[18,28]}})`.
+
+##### 逻辑运算符
+
+1. and,直接条件并列即可,`db.stu.find({age:18,hometown:"桃花岛"})`.
+2. or,使用`$or`后跟数组,`db.stu.find({$or:[{age:18},{hometown:"桃花岛"}]})`.
+
+##### 正则表达式
+
+1. `//`,`db.products.find({sku:/^abc/})`;
+2. `$regex`,`db.products.find({sku:{$regex:"789$"}})`.
+
+##### limit和skip
+
+1. limit,读取指定数量的文档,`db.stu.find().limit(2)`;
+2. skip,跳过指定数量的文档,`db.stu.find().skip(2)`;
+3. 同时使用时先使用limit后使用skip.
+
+##### 自定义查询
+
+* `$where`,`db.stu.find({$where:function(){return this.age>30;}})`.
+
+##### 投影
+
+1. 投影:选择返回结果的字段;
+2. `db.collection.find({条件},{name:1,_id:0})`.
+    1. `_id`默认会显示,置为0不显示;
+    2. 除了`_id`之外的其他字段,如果不显示,不写,不能写为0.
+
+##### 排序
+
+* `sort()`,`db.stu.find().sort({age:-1})`;
+    1. 参数为1,升序;
+    2. 参数为-1,降序.
+
+##### 统计个数
+
+* `count()`
+    1. `db.collection.find({条件}).count()`;
+    2. `db.collection.count({})`.
+
+##### 消除重复
+
+* `distinct()`去重
+    1. `db.集合名称.distinct("去重字段",{条件})`;
+    2. `db.stu.distinct("hometown",{age:{$gt:18}})`;
+
+#### mongodb备份与回复
+
+##### mongodb备份
+
+1. `mongodump -h dbhost -d dbname -o dbdirectory`.
+    1. -h,服务器地址,也可以指定端口号
+    2. -d,需要备份的数据库名称
+    2. -o,备份数据的存放位置
+2. `mongodump -h 192.168.196.128:27017 -d test -o ~/backup`.
+
+##### mongodb恢复
+
+1. `mongorestore -h dbhost -d dbname --dir dbdirectory`
+    1. -h,服务器地址,也可以指定端口号
+    2. -d,需要恢复的数据库实例
+    2. -o,备份数据的存放位置
+2. `mongorestore -h 192.168.196.128:27017 -d test1 --dir ~/backup/test`.
+
+#### mongodb聚合
+
+1. 聚合(aggregate)是基于数据处理的聚合管道,每个文档通过一个由多个阶段（stage）组成的管道，可以对每个阶段的管道进行分组、过滤等功能，然后经过一系列的处理，输出相应的结果。 
+2. `db.集合名称.aggregate({管道:{表达式}})`
+
+##### 常用管道
+
+1. `$group：` 将集合中的⽂档分组， 可⽤于统计结果
+2. `$match：` 过滤数据， 只输出符合条件的⽂档
+3. `$project：` 修改输⼊⽂档的结构，如重命名、增加、除字段、创建计算结果
+4. `$sort：` 将输⼊⽂档排序后输出
+5. `$limit：` 限制聚合管道返回的⽂档数
+6. `$skip：` 跳过指定数量的⽂档， 并返回余下的⽂档
+7. `$unwind：` 将数组类型的字段进⾏拆分
+
+##### 表达式
+
+> 语法：表达式:'$列名'
+
+1. `$sum：` 计算总和， $sum:1 表示以⼀倍计数
+1. `$avg：` 计算平均值
+1. `$min：` 获取最⼩值
+1. `$max：` 获取最⼤值
+1. `$push：` 在结果⽂档中插⼊值到⼀个数组中
+1. `$first：` 根据资源⽂档的排序获取第⼀个⽂档数据
+1. `$last：` 根据资源⽂档的排序获取最后⼀个⽂档数据
+
+##### $group
+
+1. `$group`对应的字典中有几个键，结果中就有几个键
+2. 分组依据需要放到`_id`后面
+3. 取不同的字段的值需要使用\$,`$gender`,`$age`
+4. 取字典嵌套的字典中的值的时候`$_id.country`
+5. 能够同时按照多个键进行分组`{$group:{_id:{country:"$country",province:"$province"}}}`
+    1. 结果是：`{_id:{country:"",province:""}`
+6. 按照gender进行分组，获取不同组数据的个数和平均年龄
+
+    ```sql
+    db.stu.aggregate(
+    {$group:{_id:"$gender",count:{$sum:1},avg_age:{$avg:"$age"}}},{$project:{gender:"$_id",count:1,avg_age:"$avg_age",_id:0}})
+    ```
+
+7. 按照hometown进行分组，获取不同组的平均年龄
+
+    ```sql
+    db.stu.aggregate({$group:{_id:"$hometown",mean_age:{$avg:"$age"}}})
+    ```
+
+8. 使用$group统计整个文档
+
+    ```sql
+    db.stu.aggregate({$group:{_id:null,count:{$sum:1},mean_age:{$avg:"$age"}}})
+    ```
+
+##### $match
+
+1. 用于过滤数据,只输出符合条件的文档;
+2. match是管道命令,能将结果交给后一个管道,但是find不可以.
+3. 选择年龄大于20的学生，观察男性和女性有多少人
+
+    ```sql
+    db.stu.aggregate(
+    {$match:{$or:[{age:{$gt:20}},{hometown:{$in:["蒙古","⼤理"]}}]}},{$group:{_id:"$gender",count:{$sum:1}}},{$project:{_id:0,gender:"$_id",count:1}})
+    ```
+
+##### $sort
+
+1. 将输入文档排序后输出
+2. `db.stu.aggregate({$group:{_id:"$gender",count:{$sum:1}}},{$sort:{count:-1}})`.
+
+##### $limit和$skip
+
+1. `db.stu.aggregate({$skip:2},{$limit:2})`.
+
+##### $unwind
+
+1. 将⽂档中的某⼀个数组类型字段拆分成多条， 每条包含数组中的⼀个值
+2. 语法：db.集合名称.aggregate({$unwind:'$字段名称'})
+3. `db.t2.aggregate({$unwind:"$size"})`
+4. 属性值为false表示丢弃属性值为空的⽂档
+5. 属性preserveNullAndEmptyArrays值为true表示保留属性值为空的⽂档
+6. `db.t3.aggregate({$unwind:{path:"$size",preserveNullAndEmptyArrays:true}})`
+
+#### mongodb索引
+
+##### 指令执行时间
+
+1. `db.t255.find({name:"test9999"}).explain("executionStatus")`
+
+##### 建立索引
+
+1. 语法：db.集合.ensureIndex({属性:1})，1表示升序， -1表示降序
+2. 具体操作：`db.t1.ensureIndex({name:1})`
+3. 建立唯一索引`db.t1.ensureIndex({"name":1},{"unique":true})`
+4. 创建唯一索引并消除重复`db.t1.ensureIndex({"name":1},{"unique":true,"dropDups":true})`
+5. 建立联合索引`db.t1.ensureIndex({name:1,age:1})`
+6. 查看索引`db.t1.getIndexes()`
+7. 删除索引`db.t1.dropIndex('索引名称')`
+
+#### 爬虫数据去重,实现增量式爬虫
+
+1. 使用数据库建立关键字段（一个或者多个）建立索引进行去重
+2. 根据url地址进行去重
+    1. 使用场景：
+        1. url地址对应的数据不会变的情况,url地址能够唯一判别一个条数据的情况
+    2. 思路
+        1. url存在redis中
+        2. 拿到url地址，判断url在redis的url的集合中是够存在
+        3. 存在：说明url已经被请求过，不再请求
+        4. 不存在：url地址没有被请求过，请求，把该url存入redis的集合中
+    3. 布隆过滤器
+        1. 使用多个加密算法加密url地址，得到多个值
+        2. 往对应值的位置把结果设置为1
+        3. 新来一个url地址，一样通过加密算法生成多个值
+        4. 如果对应位置的值全为1，说明这个url地址已经抓过
+        5. 否则没有抓过，就把对应位置的值设置为1
+3. 根据数据本身进行去重
+    1. 选择特定的字段，使用加密算法（md5，sha1）将字段进行加密，生成字符串，存入redis的集合中
+    2. 后续新来一条数据，同样的方法进行加密，如果得到的字符串在redis中存在，说明数据存在，对数据进行更新，否则说明数据不存在，直接插入
+
+
+
 ---
 
 # 6-牛客网
@@ -4263,5 +4586,9 @@ cd ${old_road};
 ### 飞驰人生
 
 ### 神探蒲松龄
+
+## 19-5-1
+
+### 狩猎
 
 ---
