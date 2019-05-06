@@ -444,6 +444,10 @@
         - [指令执行时间](#指令执行时间)
         - [建立索引](#建立索引)
       - [爬虫数据去重,实现增量式爬虫](#爬虫数据去重实现增量式爬虫)
+    - [19-5-6](#19-5-6)
+      - [mongodb豆瓣练习](#mongodb豆瓣练习)
+      - [pymongo](#pymongo)
+        - [基本操作](#基本操作)
 - [6-牛客网](#6-牛客网)
   - [19-3-22](#19-3-22-1)
     - [C/C++*50](#cc50)
@@ -4418,7 +4422,75 @@ alias update="sudo apt update"
     1. 选择特定的字段，使用加密算法（md5，sha1）将字段进行加密，生成字符串，存入redis的集合中
     2. 后续新来一条数据，同样的方法进行加密，如果得到的字符串在redis中存在，说明数据存在，对数据进行更新，否则说明数据不存在，直接插入
 
+### 19-5-6
 
+#### mongodb豆瓣练习
+
+* 聚合查询
+
+    ```sql
+    db.tv1.aggregate({$project:{title:1,_id:0,count:"$rating.count",rate:"$rating.value",country:"$tv_category"}},{$match:{rate:{$gt:8}}},{$group:{_id:"$country",count:{$sum:1}}},{$project:{_id:0,country:"$_id",count:1}})
+    ```
+
+#### pymongo
+
+##### 基本操作
+
+1. 实例化客户端
+
+    ```py
+    from pymongo import MongoClient
+
+    client = MongoClient(host="127.0.0.1", port=27017)
+    collection = client["test"]["t251"]
+    # 不需要主动断开连接
+    ```
+
+2. 插入数据
+
+    ```py
+    # 插入一条数据
+    ret1 = collection.insert({"name":"xiaowang","age":10})
+    # 返回objectID
+    print(ret1)
+
+    # 插入多条数据
+    data_list = [{"name": "test{}".format(i)} for i in range(10)]
+    collection.insert_many(data_list)
+    ```
+
+3. 查询记录
+
+    ```py
+    # 查询一个记录
+    t = collection.find_one({"name": "xiaowang"})
+    print(t)
+
+    # 查询所有记录
+    t = collection.find({"name": "xiaowang"})
+    # 返回游标对象,仅可遍历一次
+    print(t)
+    ```
+
+5. 更新
+
+    ```py
+    # 更新一条数据
+    collection.update_one({"name":"tset"},{"$set":{"name":"new_name"}})
+
+    # 更新全部条数据
+    collection.update_many({"name":"tset"},{"$set":{"name":"new_name"}})
+    ```
+
+6. 删除
+
+    ```py
+    # 删除一条数据
+    collection.delete_one({"name":"test"})
+
+    # 删除全部数据
+    collection.delete_many({"name":"test"})
+    ```
 
 ---
 
