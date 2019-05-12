@@ -453,6 +453,10 @@
                 - [scrapy介绍](#scrapy介绍)
                 - [scrapy工作流程](#scrapy工作流程)
                 - [scrapy入门使用](#scrapy入门使用)
+        - [19-5-12](#19-5-12)
+            - [scrapy:pipline,logging](#scrapypiplinelogging)
+                - [pipline](#pipline)
+                - [logging](#logging)
 - [6-牛客网](#6-牛客网)
     - [19-3-22](#19-3-22-1)
         - [C/C++*50](#cc50)
@@ -553,6 +557,11 @@
         - [十二怒汉](#十二怒汉)
     - [19-5-10](#19-5-10)
         - [复仇者联盟4:终局之战](#复仇者联盟4终局之战)
+    - [19-5-11](#19-5-11)
+        - [天空之城](#天空之城)
+        - [鬼子来了](#鬼子来了)
+    - [19-5-12](#19-5-12-1)
+        - [飞越疯人院](#飞越疯人院)
 
 ---
 
@@ -4530,9 +4539,25 @@ alias update="sudo apt update"
     1. 爬虫名字`name`;
     2. 允许爬取的范围`allowed_domains`;
     3. 开始请求的url地址`start_urls`;
-    4. 处理首地址对应的响应的方法`parse`,使用`xpath`提取数据,应返回`yield item`,在`pipelines`中接收(需要在`settings`中开启,可以设置权重).
+    4. 处理首地址对应的响应的方法`parse`,使用`xpath`提取数据,应返回`yield item`,在`pipelines`中接收(需要在`settings`中开启,可以设置多个并设置权重).
 4. 启动爬虫`scrapy crawl [爬虫名字]`.
     1. 在`settings`中设置logging等级.
+
+### 19-5-12
+
+#### scrapy:pipline,logging
+
+##### pipline
+
+1. 可以使用多个,每一个分别处理不同的情况;
+2. 也可以仅使用一个,通过判断来处理不同的情况;
+3. `process_item(self,item,spicder)`是特定的方法,不能改变,可以通过`spider.name`来获取爬虫名称.
+
+##### logging
+
+1. 在`settings.py`中指定`LOG_LEVEL="WARNING"`和`LOG_FILE="./log.log"`;
+2. `logger=logging.getLogger(__name__)`;
+3. 使用`logger.warning([***])`.
 
 ---
 
@@ -4756,5 +4781,15 @@ alias update="sudo apt update"
 ## 19-5-10
 
 ### 复仇者联盟4:终局之战
+
+## 19-5-11
+
+### 天空之城
+
+### 鬼子来了
+
+## 19-5-12
+
+### 飞越疯人院
 
 ---
