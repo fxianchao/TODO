@@ -457,6 +457,8 @@
             - [scrapy:pipline,logging](#scrapypiplinelogging)
                 - [pipline](#pipline)
                 - [logging](#logging)
+    - [19-5-13](#19-5-13)
+        - [翻页请求,请求头](#翻页请求请求头)
 - [6-牛客网](#6-牛客网)
     - [19-3-22](#19-3-22-1)
         - [C/C++*50](#cc50)
@@ -4558,6 +4560,18 @@ alias update="sudo apt update"
 1. 在`settings.py`中指定`LOG_LEVEL="WARNING"`和`LOG_FILE="./log.log"`;
 2. `logger=logging.getLogger(__name__)`;
 3. 使用`logger.warning([***])`.
+
+## 19-5-13
+
+### 翻页请求,请求头
+
+1. `yield scrapy.Request(next_url[,callback=self.parse,method='GET',headers,body,cookies,meta,dont_filter=False])`构造一个requests对象,同时指定提取数据的callback函数;
+    1. cookies要单独设置,不能直接在headers中,在headers中没有效果;
+    2. callback指定url交给哪个解析函数去处理;
+    3. meta,实现在不同的解析函数中传递数据,默认携带部分信息(如下载延迟,请求深度);
+    4. dont_filter,scrapy默认不会重复请求相同url.
+2. spider->request(url)->引擎->调度器->下载器->spider;
+3. 在`settings.py`中设置`USER_AGENT`;
 
 ---
 
