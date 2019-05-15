@@ -457,13 +457,15 @@
             - [scrapy:pipline,logging](#scrapypiplinelogging)
                 - [pipline](#pipline)
                 - [logging](#logging)
-    - [19-5-13](#19-5-13)
-        - [翻页请求,请求头](#翻页请求请求头)
-    - [19-5-14](#19-5-14)
-        - [item的定义和使用](#item的定义和使用)
-        - [debug信息](#debug信息)
-        - [scrapy shell](#scrapy-shell)
-        - [settings和管道的深入](#settings和管道的深入)
+        - [19-5-13](#19-5-13)
+            - [翻页请求,请求头](#翻页请求请求头)
+        - [19-5-14](#19-5-14)
+            - [item的定义和使用](#item的定义和使用)
+            - [debug信息](#debug信息)
+            - [scrapy shell](#scrapy-shell)
+            - [settings和管道的深入](#settings和管道的深入)
+        - [19-5-15](#19-5-15)
+            - [苏宁图书爬虫](#苏宁图书爬虫)
 - [6-牛客网](#6-牛客网)
     - [19-3-22](#19-3-22-1)
         - [C/C++*50](#cc50)
@@ -4566,9 +4568,9 @@ alias update="sudo apt update"
 2. `logger=logging.getLogger(__name__)`;
 3. 使用`logger.warning([***])`.
 
-## 19-5-13
+### 19-5-13
 
-### 翻页请求,请求头
+#### 翻页请求,请求头
 
 1. `yield scrapy.Request(next_url[,callback=self.parse,method='GET',headers,body,cookies,meta,dont_filter=False])`构造一个requests对象,同时指定提取数据的callback函数;
     1. cookies要单独设置,不能直接在headers中,在headers中没有效果;
@@ -4578,22 +4580,22 @@ alias update="sudo apt update"
 2. spider->request(url)->引擎->调度器->下载器->spider;
 3. 在`settings.py`中设置`USER_AGENT`;
 
-## 19-5-14
+### 19-5-14
 
-### item的定义和使用
+#### item的定义和使用
 
 1. 在`items.py`中,`scrapy.Item`和`scrapy.Field()`都是字典;
 2. 在获取到数据时,使用不同的item来存放不同的数据;
 3. 在把数据交给`pipline`的时候,可以通过`isinstance(item,MyspiderItem)`来判断数据是属于哪个item,进行不同的数据处理;
 4. 将item保存到mongodb中时,需要强制转换为`dict(item)`.
 
-### debug信息
+#### debug信息
 
-### scrapy shell
+#### scrapy shell
 
 1. 使用方法`scrapy shell [url]`.
 
-### settings和管道的深入
+#### settings和管道的深入
 
 1. 导入设置,`import`或者`self.settings.get()`;
     1. 是否遵守爬虫协议;
@@ -4605,6 +4607,13 @@ alias update="sudo apt update"
 2. 管道pipline
     1. open_spider(self,spider),爬虫开始时只执行一次;
     2. close_spider(self,spider),爬虫关闭时只执行一次;
+
+### 19-5-15
+
+#### 苏宁图书爬虫
+
+1. 操作同一个字典时,使用`deepcopy`;
+2. js记录当前页和总页数,判断是否翻页.
 
 ---
 
