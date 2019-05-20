@@ -466,6 +466,12 @@
             - [settings和管道的深入](#settings和管道的深入)
         - [19-5-15](#19-5-15)
             - [苏宁图书爬虫](#苏宁图书爬虫)
+        - [19-5-16](#19-5-16)
+            - [CrawlSpider](#crawlspider)
+        - [19-5-20](#19-5-20)
+            - [下载中间件](#下载中间件)
+            - [scrapy模拟登录](#scrapy模拟登录)
+                - [携带cookie登录](#携带cookie登录)
 - [6-牛客网](#6-牛客网)
     - [19-3-22](#19-3-22-1)
         - [C/C++*50](#cc50)
@@ -571,6 +577,9 @@
         - [鬼子来了](#鬼子来了)
     - [19-5-12](#19-5-12-1)
         - [飞越疯人院](#飞越疯人院)
+    - [19-5-19](#19-5-19)
+        - [飞屋环游记](#飞屋环游记)
+        - [大话西游之月光宝盒](#大话西游之月光宝盒)
 
 ---
 
@@ -4615,6 +4624,58 @@ alias update="sudo apt update"
 1. 操作同一个字典时,使用`deepcopy`;
 2. js记录当前页和总页数,判断是否翻页.
 
+### 19-5-16
+
+#### CrawlSpider
+
+1. 自动提取URL地址,并发送请求获得相应,仅需指定处理当前响应的方式即可;
+2. 生成一个CrawlSpider爬虫`scrapy genspider -t crawl [爬虫名] [可爬取范围]`;
+    1. 继承自`CrawlSpider`;
+    2. 自定义提取URl规则`rules`,是一个包含`Rule`对象的元组;
+        1. `LinkExtractor`连接提取器,使用正则提取URL地址,有多个参数`allow,deny,allow_domains,deny_domains,restrict_xpaths`;
+        2. `callback`,提取的url的response交给callback来处理,是一个函数名字的字符串;
+        3. `follow`,当前URl地址的响应是否能够重新经过rules来提取url地址;
+        4. `process_links`过滤url;
+        5. `process_request`过滤request.
+    3. parse函数拥有发送请求获取响应的新功能,不能重写;
+3. 不指定callback的情况下,如果follow为True,满足该rule的url还会继续被请求;
+4. 如果多个Rule都满足一个url,会从rules中选择第一个满足的进行操作;
+5. 自动将残缺的url补充完整;
+
+### 19-5-20
+
+#### 下载中间件
+
+1. 使用方法:编写一个`downloader middlewares`,然后再settings中开启它;
+2. downloader middlewares默认的方法:
+    1. `process_request(self,request,spider)`当每个request通过下载中间件时被调用,没有返回值;
+    2. `process_response(self,request,reponse,spider)`当下载器完成http请求传递响应给引擎的时候调用,应返回response;
+3. 应用:
+    1. 添加随机UA
+
+        ```py
+        class RandomUserAgentMiddleware:
+            def process_request(self, request, spider):
+                ua = random.choice(spider.settings.get("USER_AGENTS_LIST"))
+                request.headers["User-Agent"] = ua
+        ```
+
+    2. 使用随机代理
+
+       ```py
+        class ProxyMiddleware:
+            def process_request(self, request, spider):
+                request.meta["proxy"] = "http://124.115.126.76:808"
+        ```
+
+#### scrapy模拟登录
+
+##### 携带cookie登录
+
+1. 自定义`start_requests(self)`函数来处理`start_url`的请求过程,携带cookie登录;
+2. 后续请求自动携带cookie;
+3. 在`settings`中添加`COOKIES_DEBUG = True`,查看cookie发送信息.
+
 ---
 
 # 6-牛客网
@@ -4847,5 +4908,11 @@ alias update="sudo apt update"
 ## 19-5-12
 
 ### 飞越疯人院
+
+## 19-5-19
+
+### 飞屋环游记
+
+### 大话西游之月光宝盒
 
 ---
