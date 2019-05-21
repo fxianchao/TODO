@@ -472,6 +472,9 @@
             - [下载中间件](#下载中间件)
             - [scrapy模拟登录](#scrapy模拟登录)
                 - [携带cookie登录](#携带cookie登录)
+                - [发送post请求登录](#发送post请求登录)
+        - [19-5-21](#19-5-21)
+            - [贴吧爬虫-crawlspider版](#贴吧爬虫-crawlspider版)
 - [6-牛客网](#6-牛客网)
     - [19-3-22](#19-3-22-1)
         - [C/C++*50](#cc50)
@@ -4650,6 +4653,7 @@ alias update="sudo apt update"
 2. downloader middlewares默认的方法:
     1. `process_request(self,request,spider)`当每个request通过下载中间件时被调用,没有返回值;
     2. `process_response(self,request,reponse,spider)`当下载器完成http请求传递响应给引擎的时候调用,应返回response;
+    3. `process_excetion(self,exception,spider)`.
 3. 应用:
     1. 添加随机UA
 
@@ -4670,11 +4674,30 @@ alias update="sudo apt update"
 
 #### scrapy模拟登录
 
+1. request模拟登录
+    1. 直接携带cookies请求页面
+    2. 找接口发送post请求存储cookie
+2. selenium模拟登录
+    1. 找到对应的input标签,输入文字点击登录
+
 ##### 携带cookie登录
 
 1. 自定义`start_requests(self)`函数来处理`start_url`的请求过程,携带cookie登录;
 2. 后续请求自动携带cookie;
-3. 在`settings`中添加`COOKIES_DEBUG = True`,查看cookie发送信息.
+3. 在`settings`中添加`COOKIES_DEBUG = True`,查看cookie发送情况;
+4. 将cookies放入headers中登录无效.
+
+##### 发送post请求登录
+
+1. 表单请求`yield scrapy.FormRequest(url,formdata={提供完整表单},callback=回调函数)`;
+2. 自动从request中寻找form表单`yield scrapy.FormRequest.from_respose(response,formdata={仅仅提供用户名和密码},callback=回调函数)`;
+3. `yield scrapy.Request(method="POST")`.
+
+### 19-5-21
+
+#### 贴吧爬虫-crawlspider版
+
+1. `urllib.parse.urljoin(a_url,b_url)`根据第一个url地址自动补全第二个url地址.
 
 ---
 
