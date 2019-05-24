@@ -475,6 +475,9 @@
                 - [发送post请求登录](#发送post请求登录)
         - [19-5-21](#19-5-21)
             - [贴吧爬虫-crawlspider版](#贴吧爬虫-crawlspider版)
+        - [19-5-24](#19-5-24)
+            - [scrapy_redis概念](#scrapy_redis概念)
+            - [scrapy_redis示例1:dmoz](#scrapy_redis示例1dmoz)
 - [6-牛客网](#6-牛客网)
     - [19-3-22](#19-3-22-1)
         - [C/C++*50](#cc50)
@@ -4698,6 +4701,32 @@ alias update="sudo apt update"
 #### 贴吧爬虫-crawlspider版
 
 1. `urllib.parse.urljoin(a_url,b_url)`根据第一个url地址自动补全第二个url地址.
+
+### 19-5-24
+
+#### scrapy_redis概念
+
+1. 优点
+    1. request去重
+    2. 爬虫持久化
+    3. 轻松实现分布式
+2. 结合scrapy与redis,通过redis实现调度器的队列和指纹集合,将request对象存入redis数据库
+3. 可以将数据存入redis,非必须
+
+#### scrapy_redis示例1:dmoz
+
+1. 在linkextractor中使用了`css选择器`来筛选url地址
+2. 与普通crawlspider无区别,但是在`settings`中
+    1. 新增了设置`DUPEFILTER_CLASS ="scrapy_redis.dupefilter.RFPDupeFilter"`
+    2. 新增了设置`SCHEDULER = "scrapy_redis.scheduler.Scheduler"`
+    3. 新增了设置`SCHEDULER_PERSIST = True`
+    4. 还可指定redis队列类型,保持默认状态
+    5. ITEM_PIPELINES中新增`'scrapy_redis.pipelines.RedisPipeline': 400`
+    6. 还需添加一条`REDIS_URL = "redis://127.0.0.1:6379"`指定redis位置
+3. 在redis数据库中
+    1. `dmoz.requests`一个无需集合,存储序列化之后的待爬取request对象
+    2. `dmoz.items`一个列表,存储爬取获得的数据,通过`'scrapy_redis.pipelines.RedisPipeline'`存入redis
+    3. `dmoz.dupefilter`一个集合,存储已爬取的url的指纹
 
 ---
 
