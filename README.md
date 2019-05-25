@@ -476,8 +476,17 @@
         - [19-5-21](#19-5-21)
             - [贴吧爬虫-crawlspider版](#贴吧爬虫-crawlspider版)
         - [19-5-24](#19-5-24)
-            - [scrapy_redis概念](#scrapy_redis概念)
+            - [分布式爬虫scrapy_redis概念](#分布式爬虫scrapy_redis概念)
             - [scrapy_redis示例1:dmoz](#scrapy_redis示例1dmoz)
+        - [19-5-25](#19-5-25)
+            - [scrapy_redis源码](#scrapy_redis源码)
+                - [request对象什么时候入队](#request对象什么时候入队)
+                - [scrapy_redis去重方法](#scrapy_redis去重方法)
+                - [生成指纹](#生成指纹)
+                - [判断数据是否存在redis的集合中，不存在插入](#判断数据是否存在redis的集合中不存在插入)
+            - [借鉴示例1:京东图书爬虫](#借鉴示例1京东图书爬虫)
+            - [scrapy_redis示例2:myspider_redis](#scrapy_redis示例2myspider_redis)
+            - [借鉴示例2:当当图书分布式爬虫](#借鉴示例2当当图书分布式爬虫)
 - [6-牛客网](#6-牛客网)
     - [19-3-22](#19-3-22-1)
         - [C/C++*50](#cc50)
@@ -4704,10 +4713,10 @@ alias update="sudo apt update"
 
 ### 19-5-24
 
-#### scrapy_redis概念
+#### 分布式爬虫scrapy_redis概念
 
 1. 优点
-    1. request去重
+    1. request去重,基于url的增量式爬虫
     2. 爬虫持久化
     3. 轻松实现分布式
 2. 结合scrapy与redis,通过redis实现调度器的队列和指纹集合,将request对象存入redis数据库
@@ -4716,7 +4725,7 @@ alias update="sudo apt update"
 #### scrapy_redis示例1:dmoz
 
 1. 在linkextractor中使用了`css选择器`来筛选url地址
-2. 与普通crawlspider无区别,但是在`settings`中
+2. 与普通爬虫无区别,但是在`settings`中
     1. 新增了设置`DUPEFILTER_CLASS ="scrapy_redis.dupefilter.RFPDupeFilter"`
     2. 新增了设置`SCHEDULER = "scrapy_redis.scheduler.Scheduler"`
     3. 新增了设置`SCHEDULER_PERSIST = True`
@@ -4727,6 +4736,74 @@ alias update="sudo apt update"
     1. `dmoz.requests`一个无需集合,存储序列化之后的待爬取request对象
     2. `dmoz.items`一个列表,存储爬取获得的数据,通过`'scrapy_redis.pipelines.RedisPipeline'`存入redis
     3. `dmoz.dupefilter`一个集合,存储已爬取的url的指纹
+
+### 19-5-25
+
+#### scrapy_redis源码
+
+1. `piplines.py`中`RedisPipline`实现将内容保存到redis中
+2. `dupefilter.py`中`RFPDupeFilter`实现指纹判断,去重
+3. `scheduler.py`中`Scheduler`实现持久化
+
+##### request对象什么时候入队
+
+1. dont_filter = True ,构造请求的时候，把dont_filter置为True，该url会被反复抓取（url地址对应的内容会更新的情况）
+2. 一个全新的url地址被抓到的时候，构造request请求
+3. url地址在start_urls中的时候，会入队，不管之前是否请求过
+    1. 构造start_url地址的请求时候，dont_filter = True
+    2. 代码
+
+        ````python
+        def enqueue_request(self, request):
+            if not request.dont_filter and self.df.request_seen(request):
+                # dont_filter=False Ture  True request指纹已经存在  #不会入队
+                # dont_filter=False Ture  False  request指纹已经存在 全新的url  #会入队
+                # dont_filter=Ture False  #会入队
+                self.df.log(request, self.spider)
+                return False
+            self.queue.push(request) #入队
+            return True
+        ```
+
+##### scrapy_redis去重方法
+
+1. 使用sha1加密request得到指纹
+2. 把指纹存在redis的集合中
+3. 下一次新来一个request，同样的方式生成指纹，判断指纹是否存在reids的集合中
+
+##### 生成指纹
+
+1. 生成指纹,与scrapy中生成指纹的方式一样
+
+    ```python
+    fp = hashlib.sha1()
+    fp.update(to_bytes(request.method))  #请求方法
+    fp.update(to_bytes(canonicalize_url(request.url))) #url
+    fp.update(request.body or b'')  #请求体
+    return fp.hexdigest()
+    ```
+
+##### 判断数据是否存在redis的集合中，不存在插入
+
+1. 判断reids是否存在
+
+    ```python
+    added = self.server.sadd(self.key, fp)
+    return added != 0
+    ```
+
+#### 借鉴示例1:京东图书爬虫
+
+1. 获取价格需要发送额外的请求.
+
+#### scrapy_redis示例2:myspider_redis
+
+1. 和普通爬虫的区别
+    1. 继承自`RedisSpider`
+    2. 多了一个`redis_key='myspider:start_urls'`,直到redis中有对应的url才会开始爬取
+    3. 在初始化方法`__init__()`中动态定义可爬取范围,也可以直接写死可爬取范围
+
+#### 借鉴示例2:当当图书分布式爬虫
 
 ---
 
