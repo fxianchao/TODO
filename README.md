@@ -492,6 +492,13 @@
             - [借鉴示例3:亚马逊图书爬虫](#借鉴示例3亚马逊图书爬虫)
             - [pycharm发布代码](#pycharm发布代码)
             - [crontab爬虫定时执行](#crontab爬虫定时执行)
+    - [>>>21-数据分析](#21-数据分析)
+        - [19-5-30](#19-5-30)
+            - [数据分析介绍](#数据分析介绍)
+            - [环境安装](#环境安装)
+        - [19-6-1](#19-6-1)
+            - [matplotlib折线图](#matplotlib折线图)
+            - [matplotlib官网样例](#matplotlib官网样例)
 - [6-牛客网](#6-牛客网)
     - [19-3-22](#19-3-22-1)
         - [C/C++*50](#cc50)
@@ -600,6 +607,8 @@
     - [19-5-19](#19-5-19)
         - [飞屋环游记](#飞屋环游记)
         - [大话西游之月光宝盒](#大话西游之月光宝盒)
+    - [19-5-29](#19-5-29)
+        - [惊奇队长](#惊奇队长)
 
 ---
 
@@ -4831,6 +4840,56 @@ alias update="sudo apt update"
 2. 使用`crontab -e`进入编辑页面
 3. 使用`crontab -l`查看当前的定时任务
 
+## >>>21-数据分析
+
+### 19-5-30
+
+#### 数据分析介绍
+
+1. 数据分析是用适当的方法对收集来的大量数据进行分析.帮助人们做出判断,以便采取适当的行动.
+2. 流程
+    1. 提出问题
+    2. 准备数据
+    3. 分析数据
+    4. 获得结论
+    5. 成果可视化
+
+#### 环境安装
+
+1. 创建虚拟环境`conda create -n data`
+2. 安装ipython`conda install ipython`
+3. 安装jupyter`conda install jupyter`
+4. 安装matplotlib`conda install matplotlib`
+
+### 19-6-1
+
+#### matplotlib折线图
+
+1. 导入pyplot画图`from matplotlib import pyplot as plt`
+2. 画图`plt.plot([x],[y])`
+3. 展示`plt.show()`
+4. 在jupyter notebook中导入python文件`%load 文件绝对路径`,导入之后第一次`Ctrl+Enter`加载,第二次`Ctrl+Enter`运行文件
+5. 设置图片大小`plt.figure(filesize=(x,y),dpi=int)`
+6. 保存图片`plt.savefig("路径+文件名.格式")`
+7. X轴的刻度`plt.xticks([数字],[字符串:非必须],rotation:旋转角度,fontproperties=my_font)`
+8. Y轴的刻度`plt.yticks([数字],[字符串:非必须],rotation:旋转角度,fontproperties=my_font)`
+9. linux系统查看字体命令`fc-list`或`fc-list :lang=zh`查看支持中文的字体(注意有一个空格)
+10. 解决中文字体显示问题
+    1. 方式一`matplotlib.rc("font",family='MicroSoft YaHei',weight="bold",size="")`
+    2. 方式二`my_font = font_manager.FontProperties(fname="C:\Windows\Fonts\STXINGKA.TTF")`字体路径
+11. X轴描述`plt.xlabel(string,fontproperties=my_font)`
+12. Y轴描述`plt.ylabel(string,fontproperties=my_font)`
+13. 标题`plt.title(string,fontproperties=my_font)`
+14. 绘制网格`plt.grid(alpha=0.1:透明度,linestyle=string)`
+15. 显示图例
+    1. 第一步`plt.plot([x],[y],label=string:图例)`
+    2. 设置显示图例`plt.legend(prop=my_font:字体,loc=string或int或(x,y):位置)`
+16. 设置线条风格`plt.plot([x],[y],color=string:颜色,linestyle=string:线条样式,linewidth=int:线宽,alpha=int:透明度)`
+
+#### matplotlib官网样例
+
+1. [matplotlib官网](https://matplotlib.org/gallery/index.html)提供多种样例以及对应代码.
+
 ---
 
 # 6-牛客网
@@ -5069,5 +5128,9 @@ alias update="sudo apt update"
 ### 飞屋环游记
 
 ### 大话西游之月光宝盒
+
+## 19-5-29
+
+### 惊奇队长
 
 ---
