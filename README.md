@@ -499,6 +499,17 @@
         - [19-6-1](#19-6-1)
             - [matplotlib折线图](#matplotlib折线图)
             - [matplotlib官网样例](#matplotlib官网样例)
+        - [19-6-2](#19-6-2)
+            - [matplotlib常用统计图](#matplotlib常用统计图)
+                - [matplotlib散点图](#matplotlib散点图)
+                - [matplotlib条形图](#matplotlib条形图)
+                - [matplotlib直方图](#matplotlib直方图)
+            - [其他画图工具](#其他画图工具)
+            - [numpy数组](#numpy数组)
+                - [numpy数组的创建](#numpy数组的创建)
+                - [numpy数组数据类型](#numpy数组数据类型)
+                - [numpy数组的形状](#numpy数组的形状)
+                - [numpy数组的计算](#numpy数组的计算)
 - [6-牛客网](#6-牛客网)
     - [19-3-22](#19-3-22-1)
         - [C/C++*50](#cc50)
@@ -609,6 +620,8 @@
         - [大话西游之月光宝盒](#大话西游之月光宝盒)
     - [19-5-29](#19-5-29)
         - [惊奇队长](#惊奇队长)
+    - [19-6-2](#19-6-2-1)
+        - [胖子行动队](#胖子行动队)
 
 ---
 
@@ -4890,6 +4903,65 @@ alias update="sudo apt update"
 
 1. [matplotlib官网](https://matplotlib.org/gallery/index.html)提供多种样例以及对应代码.
 
+
+### 19-6-2
+
+#### matplotlib常用统计图
+
+##### matplotlib散点图
+
+1. 绘制函数`plt.scatter([x],[y])`
+
+##### matplotlib条形图
+
+1. 绘制垂直条形图函数`plt.bar([x],[y],width=int)`
+2. 绘制水平条形图函数`plt.barh([x],[y],height=int)`(注意,不能使用width,会覆盖y轴)
+3. 绘制多条条形图,控制x坐标多次绘制
+
+##### matplotlib直方图
+
+1. 频数直方图函数`plt.hist([a],num_bins:组数int或列表)`
+2. 频率直方图函数`plt.hist([a],num_bins:组数int或列表,destiny=True)`
+3. 有原始数据可以使用直方图,经过处理的数据可以使用条形图模拟直方图
+
+#### 其他画图工具
+
+1. 前端工具`百度ECHARTS`
+2. plotly,画图界的github
+3. seaborn,类似matplotlib
+
+#### numpy数组
+
+1. 科学计算库的基础库,多用于大型多维数组计算
+
+##### numpy数组的创建
+
+1. 创建数组,得到的类型为`numpy.ndarray`
+    1. np.array([],dtype=)
+    2. np.array(range(a,b),dtype=)
+    3. np.arange(a,b)
+
+##### numpy数组数据类型
+
+1. numpy数组数据的类型`array.dtype`
+2. 改变数组中数据的类型`array.astype()`
+3. 浮点数四舍五入`np.round(array,int)`
+
+##### numpy数组的形状
+
+1. 查看数组的维数`array.shape`
+2. 修改数组的维数`array.reshape()`不改变array本身
+3. 降为一维数组`array.flatten()`
+
+##### numpy数组的计算
+
+1. 和单个数字计算,实际为数组中所有单位逐个执行该计算
+2. `nan`非数字,`inf`无穷大
+3. 数组之间计算
+    1. 维度相同,对应位置直接计算
+    2. 维度不同,但是某一维度相同,在该维度上进行计算
+4. 广播原则:如果两个数组的后缘纬度(从末尾开始的维度)的轴长度相符或其中一方的长度为1,则认为他们是广播兼容的.广播会在缺失和(或)长度为1的维度上进行.
+
 ---
 
 # 6-牛客网
@@ -5132,5 +5204,9 @@ alias update="sudo apt update"
 ## 19-5-29
 
 ### 惊奇队长
+
+## 19-6-2
+
+### 胖子行动队
 
 ---
