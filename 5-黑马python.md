@@ -278,6 +278,10 @@
       - [pandas读取外部数据](#pandas读取外部数据)
     - [19-6-11](#19-6-11)
       - [pandas常用数据类型-二维的Series容器**DataFrame**](#pandas常用数据类型-二维的series容器dataframe)
+    - [19-6-15](#19-6-15)
+      - [DataFrame中的bool索引](#dataframe中的bool索引)
+      - [缺失数据的处理](#缺失数据的处理)
+      - [pandas常用统计方法](#pandas常用统计方法)
 
 ---
 
@@ -1860,3 +1864,42 @@
     1.  通过标签索引行数据`df.loc["a","z"]`取的是a行z列,可以使用`:`选择全部,但是此时区间为闭合区间
     2.  通过位置获取行数据`df.iloc[1,2]`取的是2行3列
 15. 选取之后可以直接赋值,此时赋值为`np.nan`不会报错
+
+### 19-6-15
+
+#### DataFrame中的bool索引
+
+1. 不同条件之间使用括号括起来,使用`&`或者`|`连接
+2. `.str`获取字符串,有多种字符串方法
+
+#### 缺失数据的处理
+
+1. pandas统计时不会理会NaN
+2. 判断有没有NaN`pd.isnull(df)`或`pd.notnull(df)`
+3. 删除NaN所在的行列`df.dropna(axis=0,how="any",inplace=False)`
+4. 填充数据`df.fillna(df.mean())`
+5. 处理为0的操作`df[df==0]=np.nan`
+
+#### pandas常用统计方法
+
+### 19-6-18
+
+#### 字符串离散化
+
+1. 构造全0数组,行数与数据行数一样,列数为类别数量
+2. 遍历数据行,将全0数组中对应的位置置1
+3. 得到一个在特定位置存在标记的数组,可以进行统计分析
+
+#### 数据合并之join
+
+1. `join`默认情况下把行索引相同的数据合并到一起
+2. `df1.join(df2)`以df1的行数为准,丢弃或补足df2中的数据
+
+#### 数据合并之merge
+
+1. `merge`按照指定的列把数据按照一定的方式合并到一起
+2. on可以为`left_on`和`right_on`处理没有相同列的情况
+3. `df1.merge(df2,on="列",how=inner)`默认的合并方式为`inner`交集,只合并重复的部分
+4. `df1.merge(df2,on="列",how=outer)`指定合并方式为`outer`并集,包含df1和df2全部,没有的以NaN补全
+5. `df1.merge(df2,on="列",how=left)`指定合并方式为`left`左连接,以df1为准,没有的以NaN补全
+6. `df1.merge(df2,on="列",how=right)`指定合并方式为`right`右连接,以df2为准,没有的以NaN补全
