@@ -1,20 +1,20 @@
 - [黑马python](#黑马python)
   - [~~>>>15-flask教程{19-3-21}~~](#15-flask教程19-3-21)
     - [??-??-??](#--)
-      - [路由模块=Werkzeug](#路由模块werkzeug)
+      - [路由模块=Werkzeug](#路由模块Werkzeug)
       - [模板引擎=jinja2](#模板引擎jinja2)
-      - [操作数据库=Flask-SQLalchemy](#操作数据库flask-sqlalchemy)
-      - [表单=Flask-WTF](#表单flask-wtf)
-      - [扩展命令行=Flask-script](#扩展命令行flask-script)
-      - [认证用户状态=Flask-Login](#认证用户状态flask-login)
-      - [开发REST API的工具=Flask-RESTful](#开发rest-api的工具flask-restful)
-      - [集成前端Twitter Bootstrap框架=Flask-Bootstrap](#集成前端twitter-bootstrap框架flask-bootstrap)
-      - [本地化日期和时间=Flask-Moment](#本地化日期和时间flask-moment)
+      - [操作数据库=Flask-SQLalchemy](#操作数据库Flask-SQLalchemy)
+      - [表单=Flask-WTF](#表单Flask-WTF)
+      - [扩展命令行=Flask-script](#扩展命令行Flask-script)
+      - [认证用户状态=Flask-Login](#认证用户状态Flask-Login)
+      - [开发REST API的工具=Flask-RESTful](#开发REST-API的工具Flask-RESTful)
+      - [集成前端Twitter Bootstrap框架=Flask-Bootstrap](#集成前端Twitter-Bootstrap框架Flask-Bootstrap)
+      - [本地化日期和时间=Flask-Moment](#本地化日期和时间Flask-Moment)
       - [反向解析=url_for](#反向解析url_for)
-      - [JSON数据=jsonify](#json数据jsonify)
+      - [JSON数据=jsonify](#JSON数据jsonify)
     - [19-3-20](#19-3-20)
-      - [数据库迁移=Flask-Migrate](#数据库迁移flask-migrate)
-      - [邮箱扩展=Flask-Mail](#邮箱扩展flask-mail)
+      - [数据库迁移=Flask-Migrate](#数据库迁移Flask-Migrate)
+      - [邮箱扩展=Flask-Mail](#邮箱扩展Flask-Mail)
       - [模块划分,循环引用,蓝图](#模块划分循环引用蓝图)
     - [19-3-21](#19-3-21)
       - [单元测试](#单元测试)
@@ -91,7 +91,7 @@
         - [手机网站支付流程](#手机网站支付流程)
     - [19-4-12](#19-4-12)
       - [订单支付(续)](#订单支付续)
-        - [支付宝密钥与SDK使用](#支付宝密钥与sdk使用)
+        - [支付宝密钥与SDK使用](#支付宝密钥与SDK使用)
         - [支付宝支付后端接口](#支付宝支付后端接口)
         - [获取支付结果修改订单](#获取支付结果修改订单)
       - [项目优化](#项目优化)
@@ -105,11 +105,11 @@
         - [爬虫的分类](#爬虫的分类)
         - [markdown介绍](#markdown介绍)
         - [robots协议](#robots协议)
-        - [HTTP和HTTPS协议](#http和https协议)
-        - [浏览器发送HTTP请求的过程](#浏览器发送http请求的过程)
+        - [HTTP和HTTPS协议](#HTTP和HTTPS协议)
+        - [浏览器发送HTTP请求的过程](#浏览器发送HTTP请求的过程)
     - [19-4-19](#19-4-19)
         - [爬虫基本概念[续]](#爬虫基本概念续)
-          - [URL和HTTP请求格式](#url和http请求格式)
+          - [URL和HTTP请求格式](#URL和HTTP请求格式)
           - [字符串类型](#字符串类型)
         - [requests库](#requests库)
           - [发送请求和获取网页字符串](#发送请求和获取网页字符串)
@@ -117,7 +117,7 @@
     - [19-4-20](#19-4-20)
       - [requests库[续]](#requests库续)
         - [贴吧爬虫](#贴吧爬虫)
-        - [发送POST请求](#发送post请求)
+        - [发送POST请求](#发送POST请求)
         - [使用代理](#使用代理)
         - [模拟登录的三种方式](#模拟登录的三种方式)
       - [chrome分析psot和json](#chrome分析psot和json)
@@ -134,9 +134,9 @@
         - [正则和原始字符串](#正则和原始字符串)
         - [内涵段子爬虫](#内涵段子爬虫)
     - [19-4-23](#19-4-23)
-      - [XPATN处理数据](#xpatn处理数据)
-        - [了解XML](#了解xml)
-        - [XPATH](#xpath)
+      - [XPATN处理数据](#XPATN处理数据)
+        - [了解XML](#了解XML)
+        - [XPATH](#XPATH)
         - [lxml库](#lxml库)
       - [通用爬虫案例](#通用爬虫案例)
         - [xpath的包含](#xpath的包含)
@@ -146,13 +146,13 @@
         - [多线程爬虫](#多线程爬虫)
     - [19-4-24](#19-4-24)
       - [爬取动态html数据](#爬取动态html数据)
-        - [动态HTML技术](#动态html技术)
-        - [Selenium](#selenium)
-        - [PhantomJS](#phantomjs)
+        - [动态HTML技术](#动态HTML技术)
+        - [Selenium](#Selenium)
+        - [PhantomJS](#PhantomJS)
         - [豆瓣登陆案例](#豆瓣登陆案例)
         - [验证码的识别](#验证码的识别)
         - [selenium使用的注意点](#selenium使用的注意点)
-        - [使用Tesseract](#使用tesseract)
+        - [使用Tesseract](#使用Tesseract)
     - [19-4-25](#19-4-25)
       - [斗鱼爬虫](#斗鱼爬虫)
       - [mongodb介绍及安装](#mongodb介绍及安装)
@@ -216,7 +216,7 @@
     - [19-5-15](#19-5-15)
       - [苏宁图书爬虫](#苏宁图书爬虫)
     - [19-5-16](#19-5-16)
-      - [CrawlSpider](#crawlspider)
+      - [CrawlSpider](#CrawlSpider)
     - [19-5-20](#19-5-20)
       - [下载中间件](#下载中间件)
       - [scrapy模拟登录](#scrapy模拟登录)
@@ -274,14 +274,20 @@
       - [numpy中的注意点copy和view](#numpy中的注意点copy和view)
     - [19-6-9](#19-6-9)
       - [pandas简介](#pandas简介)
-      - [pandas常用数据类型-一维的带标签数组**Series**](#pandas常用数据类型-一维的带标签数组series)
+      - [pandas常用数据类型-一维的带标签数组**Series**](#pandas常用数据类型-一维的带标签数组Series)
       - [pandas读取外部数据](#pandas读取外部数据)
     - [19-6-11](#19-6-11)
-      - [pandas常用数据类型-二维的Series容器**DataFrame**](#pandas常用数据类型-二维的series容器dataframe)
+      - [pandas常用数据类型-二维的Series容器**DataFrame**](#pandas常用数据类型-二维的Series容器DataFrame)
     - [19-6-15](#19-6-15)
-      - [DataFrame中的bool索引](#dataframe中的bool索引)
+      - [DataFrame中的bool索引](#DataFrame中的bool索引)
       - [缺失数据的处理](#缺失数据的处理)
       - [pandas常用统计方法](#pandas常用统计方法)
+    - [19-6-18](#19-6-18)
+      - [字符串离散化](#字符串离散化)
+      - [数据合并之join](#数据合并之join)
+      - [数据合并之merge](#数据合并之merge)
+    - [19-6-19](#19-6-19)
+      - [数据分组与聚合](#数据分组与聚合)
 
 ---
 
@@ -1903,3 +1909,23 @@
 4. `df1.merge(df2,on="列",how=outer)`指定合并方式为`outer`并集,包含df1和df2全部,没有的以NaN补全
 5. `df1.merge(df2,on="列",how=left)`指定合并方式为`left`左连接,以df1为准,没有的以NaN补全
 6. `df1.merge(df2,on="列",how=right)`指定合并方式为`right`右连接,以df2为准,没有的以NaN补全
+
+### 19-6-19
+
+#### 数据分组与聚合
+
+1. 分组`group = df.groupby(by="列")`返回`DataFrameGroupBy`类
+   1. 可迭代,每个元素都是一个元组(分组依据, 分组依据下得到的DataFrame)
+   2. 可调用聚合方法
+      1. 统计数量`group["列"].count()`
+      2. 求和`sum`
+      3. 均值`mean`
+      4. 中位数`median`
+      5. 标准差和反差`std/var`
+      6. 最值`max/min`
+2. 数据按照多个条件进行分组
+   1. 对某几列数据按照多个条件分组`df["Brand"].groupby(by=[df["Country"],df["State/Province"]]).count()`by条件需要带`df["条件"]`,返回Series对象
+   2. 强行返回DataFrame
+      1. `grouped1 = df[["Brand"]].groupby(by=[df["Country"],df["State/Province"]]).count()`
+      2. `grouped2= df.groupby(by=["Country","State/Province"])[["Brand"]].count()`
+      3. `grouped3 = df.groupby(by=["Country","State/Province"]).count()[["Brand"]]`
