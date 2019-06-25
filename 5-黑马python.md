@@ -288,6 +288,10 @@
       - [数据合并之merge](#数据合并之merge)
     - [19-6-19](#19-6-19)
       - [数据分组与聚合](#数据分组与聚合)
+    - [19-6-25](#19-6-25)
+      - [数据的索引](#数据的索引)
+      - [pandas时间序列](#pandas时间序列)
+      - [pandas重采样](#pandas重采样)
 
 ---
 
@@ -1929,3 +1933,27 @@
       1. `grouped1 = df[["Brand"]].groupby(by=[df["Country"],df["State/Province"]]).count()`
       2. `grouped2= df.groupby(by=["Country","State/Province"])[["Brand"]].count()`
       3. `grouped3 = df.groupby(by=["Country","State/Province"]).count()[["Brand"]]`
+
+### 19-6-25
+
+#### 数据的索引
+
+1. 获取索引`df.index`
+2. 指定索引`df.index=[list]`
+3. 重新设置索引`df.reindex()`,取原数据中已存在的索引加上不存在的索引
+4. 指定某一列作为索引`df.set_index("列",drop=True)`,默认情况下会把该列删掉,指定drop=False可以保留该列
+5. 返回索引的唯一值`df.set_index("列").index.unique()`,意味着索引可以重复
+6. 复合索引`df.set_index(["列1","列2"])`
+7. series取复合索引`df["index1"]["index2"]`或`df["index1","index2"]`
+8. dataframe取复合索引`df.loc["index1"].loc["index2"]`
+9. 交换复合索引`df.swaplevel()`
+
+#### pandas时间序列
+
+1. 生成一段时间范围`pd.date_range(start=None,end=None,periods=None,freq="10D"|"H"|"M")`,end和periods一般不同时使用,返回DataTimeIndex类型
+2. 把时间字符串转化为时间序列`pd.to_datetime(df["timeStamp"],format="")`
+
+#### pandas重采样
+
+1. 指的是将时间序列从一个频率转化为另一个频率进行处理的过程,将高频转化为低频为降采样,低频转化为高频为升采样
+2. 重采样函数`df.resample("freq")`
