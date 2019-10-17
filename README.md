@@ -26,4 +26,4 @@
 
 ## [14-Git与Github入门(完结)](./14-Git与GitHub入门.md)
 
-## [15-MySQL基础](./15-MySQL基础.md)
+## [15-MySQL基础(完结)](./15-MySQL基础.md)
