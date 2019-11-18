@@ -27,3 +27,9 @@
 ## [14-Git与Github入门(完结)](./14-Git与GitHub入门.md)
 
 ## [15-MySQL基础(完结)](./15-MySQL基础.md)
+
+## [16-PythonCookbook](./16-PythonCookbook.md)
+
+## [17-Go笔记](./17-Go笔记.md)
+
+## [18-linux基础入门](./18-linux基础入门.md)
