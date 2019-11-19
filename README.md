@@ -30,6 +30,6 @@
 
 ## [16-PythonCookbook](./16-PythonCookbook.md)
 
-## [17-Go笔记](./17-Go笔记.md)
+## [17-Go入门笔记(完结)](./17-Go入门笔记.md)
 
 ## [18-linux基础入门](./18-linux基础入门.md)
